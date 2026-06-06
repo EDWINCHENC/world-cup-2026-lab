@@ -1,0 +1,12 @@
+worldcup2026.cdef.cc {
+	root * /var/www/world-cup-2026
+	encode zstd gzip
+
+	try_files {path} {path}.html {path}/index.html
+	file_server
+
+	handle_errors {
+		rewrite * /404.html
+		file_server
+	}
+}

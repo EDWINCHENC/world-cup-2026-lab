@@ -1,9 +1,13 @@
+import scheduleData from "@/data/world-cup-2026-schedule.json";
+import historyData from "@/data/history-features.json";
+
 export type Team = {
   id: string;
+  sourceName: string;
   name: string;
   flag: string;
   group: string;
-  rank: number;
+  rank: number | null;
   elo: number;
   form: number;
   attack: number;
@@ -12,45 +16,76 @@ export type Team = {
 
 export type Match = {
   id: string;
-  time: string;
+  date: string;
+  time: null;
   group: string;
   homeId: string;
   awayId: string;
+  city: string;
   watchValue: number;
   upsetRisk: number;
 };
 
-export const teams: Team[] = [
-  { id: "bra", name: "巴西", flag: "🇧🇷", group: "C", rank: 5, elo: 1986, form: 82, attack: 88, defense: 81 },
-  { id: "mar", name: "摩洛哥", flag: "🇲🇦", group: "C", rank: 14, elo: 1845, form: 78, attack: 76, defense: 84 },
-  { id: "fra", name: "法国", flag: "🇫🇷", group: "D", rank: 2, elo: 2021, form: 86, attack: 91, defense: 85 },
-  { id: "aus", name: "澳大利亚", flag: "🇦🇺", group: "D", rank: 23, elo: 1754, form: 69, attack: 70, defense: 73 },
-  { id: "ger", name: "德国", flag: "🇩🇪", group: "A", rank: 9, elo: 1902, form: 79, attack: 84, defense: 78 },
-  { id: "sco", name: "苏格兰", flag: "🏴", group: "A", rank: 39, elo: 1668, form: 65, attack: 68, defense: 70 },
-  { id: "arg", name: "阿根廷", flag: "🇦🇷", group: "B", rank: 1, elo: 2058, form: 91, attack: 90, defense: 88 },
-  { id: "nga", name: "尼日利亚", flag: "🇳🇬", group: "B", rank: 28, elo: 1726, form: 73, attack: 78, defense: 69 },
-  { id: "jpn", name: "日本", flag: "🇯🇵", group: "E", rank: 15, elo: 1832, form: 84, attack: 82, defense: 79 },
-  { id: "cro", name: "克罗地亚", flag: "🇭🇷", group: "E", rank: 10, elo: 1888, form: 75, attack: 79, defense: 82 },
-  { id: "mex", name: "墨西哥", flag: "🇲🇽", group: "F", rank: 17, elo: 1798, form: 72, attack: 76, defense: 75 },
-  { id: "kor", name: "韩国", flag: "🇰🇷", group: "F", rank: 22, elo: 1769, form: 77, attack: 80, defense: 72 },
+type TeamSeed = [id: string, sourceName: string, name: string, flag: string, group: string, rank?: number, elo?: number];
+
+const teamSeeds: TeamSeed[] = [
+  ["mex", "Mexico", "墨西哥", "🇲🇽", "A", 17, 1798], ["rsa", "South Africa", "南非", "🇿🇦", "A"], ["kor", "South Korea", "韩国", "🇰🇷", "A", 22, 1769], ["cze", "Czech Republic", "捷克", "🇨🇿", "A"],
+  ["can", "Canada", "加拿大", "🇨🇦", "B"], ["bih", "Bosnia and Herzegovina", "波黑", "🇧🇦", "B"], ["qat", "Qatar", "卡塔尔", "🇶🇦", "B"], ["sui", "Switzerland", "瑞士", "🇨🇭", "B"],
+  ["bra", "Brazil", "巴西", "🇧🇷", "C", 5, 1986], ["mar", "Morocco", "摩洛哥", "🇲🇦", "C", 14, 1845], ["hai", "Haiti", "海地", "🇭🇹", "C"], ["sco", "Scotland", "苏格兰", "🏴", "C", 39, 1668],
+  ["usa", "United States", "美国", "🇺🇸", "D"], ["par", "Paraguay", "巴拉圭", "🇵🇾", "D"], ["aus", "Australia", "澳大利亚", "🇦🇺", "D", 23, 1754], ["tur", "Turkey", "土耳其", "🇹🇷", "D"],
+  ["ger", "Germany", "德国", "🇩🇪", "E", 9, 1902], ["cuw", "Curaçao", "库拉索", "🇨🇼", "E"], ["civ", "Ivory Coast", "科特迪瓦", "🇨🇮", "E"], ["ecu", "Ecuador", "厄瓜多尔", "🇪🇨", "E"],
+  ["ned", "Netherlands", "荷兰", "🇳🇱", "F"], ["jpn", "Japan", "日本", "🇯🇵", "F", 15, 1832], ["swe", "Sweden", "瑞典", "🇸🇪", "F"], ["tun", "Tunisia", "突尼斯", "🇹🇳", "F"],
+  ["bel", "Belgium", "比利时", "🇧🇪", "G"], ["egy", "Egypt", "埃及", "🇪🇬", "G"], ["irn", "Iran", "伊朗", "🇮🇷", "G"], ["nzl", "New Zealand", "新西兰", "🇳🇿", "G"],
+  ["esp", "Spain", "西班牙", "🇪🇸", "H"], ["cpv", "Cape Verde", "佛得角", "🇨🇻", "H"], ["ksa", "Saudi Arabia", "沙特阿拉伯", "🇸🇦", "H"], ["uru", "Uruguay", "乌拉圭", "🇺🇾", "H"],
+  ["fra", "France", "法国", "🇫🇷", "I", 2, 2021], ["sen", "Senegal", "塞内加尔", "🇸🇳", "I"], ["irq", "Iraq", "伊拉克", "🇮🇶", "I"], ["nor", "Norway", "挪威", "🇳🇴", "I"],
+  ["arg", "Argentina", "阿根廷", "🇦🇷", "J", 1, 2058], ["alg", "Algeria", "阿尔及利亚", "🇩🇿", "J"], ["aut", "Austria", "奥地利", "🇦🇹", "J"], ["jor", "Jordan", "约旦", "🇯🇴", "J"],
+  ["por", "Portugal", "葡萄牙", "🇵🇹", "K"], ["cod", "DR Congo", "刚果（金）", "🇨🇩", "K"], ["uzb", "Uzbekistan", "乌兹别克斯坦", "🇺🇿", "K"], ["col", "Colombia", "哥伦比亚", "🇨🇴", "K"],
+  ["eng", "England", "英格兰", "🏴", "L"], ["cro", "Croatia", "克罗地亚", "🇭🇷", "L", 10, 1888], ["gha", "Ghana", "加纳", "🇬🇭", "L"], ["pan", "Panama", "巴拿马", "🇵🇦", "L"],
 ];
 
-export const matches: Match[] = [
-  { id: "m1", time: "18:00", group: "A", homeId: "ger", awayId: "sco", watchValue: 74, upsetRisk: 18 },
-  { id: "m2", time: "21:00", group: "C", homeId: "bra", awayId: "mar", watchValue: 94, upsetRisk: 31 },
-  { id: "m3", time: "00:00", group: "D", homeId: "fra", awayId: "aus", watchValue: 79, upsetRisk: 21 },
-  { id: "m4", time: "03:00", group: "B", homeId: "arg", awayId: "nga", watchValue: 86, upsetRisk: 24 },
-];
-
-export const groups = ["A", "B", "C", "D", "E", "F"].map((name) => {
-  const groupTeams = teams.filter((team) => team.group === name);
-  const averageElo = Math.round(groupTeams.reduce((sum, team) => sum + team.elo, 0) / groupTeams.length);
+export const teams: Team[] = teamSeeds.map(([id, sourceName, name, flag, group, rank = null, seedElo]) => {
+  const history = historyData.teamFeatures[id as keyof typeof historyData.teamFeatures];
   return {
+    id,
+    sourceName,
     name,
-    teams: groupTeams,
-    strength: Math.round(55 + (averageElo - 1700) / 8),
-    closeness: Math.round(72 - Math.abs(groupTeams[0].elo - groupTeams[1].elo) / 12),
+    flag,
+    group,
+    rank,
+    elo: history?.eloRating ?? seedElo ?? 1500,
+    form: history?.formScore ?? 70,
+    attack: history?.attackScore ?? 70,
+    defense: history?.defenseScore ?? 70,
   };
 });
 
 export const teamById = new Map(teams.map((team) => [team.id, team]));
+export const teamBySourceName = new Map(teams.map((team) => [team.sourceName, team]));
+
+export const matches: Match[] = scheduleData.matches.map((match) => ({
+  id: match.id,
+  date: match.date,
+  time: null,
+  group: match.group,
+  homeId: teamBySourceName.get(match.homeSourceName)!.id,
+  awayId: teamBySourceName.get(match.awaySourceName)!.id,
+  city: match.city,
+  watchValue: 75,
+  upsetRisk: 25,
+}));
+
+export const availableMatchDates = [...new Set(matches.map((match) => match.date))];
+
+export const groups = "ABCDEFGHIJKL".split("").map((name) => {
+  const groupTeams = teams.filter((team) => team.group === name);
+  const averageElo = Math.round(groupTeams.reduce((sum, team) => sum + team.elo, 0) / groupTeams.length);
+  const sortedElo = groupTeams.map((team) => team.elo).toSorted((a, b) => b - a);
+  return {
+    name,
+    teams: groupTeams,
+    strength: Math.round(55 + (averageElo - 1650) / 7),
+    closeness: Math.round(80 - (sortedElo[0] - sortedElo.at(-1)!) / 10),
+  };
+});
+
+export const scheduleMetadata = scheduleData.metadata;

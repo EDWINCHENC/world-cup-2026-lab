@@ -22,11 +22,12 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
 import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
-import { historyMetadata } from "@/lib/history";
-import { groups, matches, teamById, teams, type Match, type Team } from "@/lib/world-cup-data";
-import { predictMatch } from "@/lib/predictor";
+import { getTeamHistory, historyMetadata } from "@/lib/history";
+import { availableMatchDates, groups, matches, scheduleMetadata, teamById, teams, type Match, type Team } from "@/lib/world-cup-data";
+import { defaultModelWeights, predictMatch, type ModelWeights, type Prediction } from "@/lib/predictor";
 import { cn } from "@/lib/utils";
 
 type View = "today" | "groups" | "predict" | "more";
@@ -38,6 +39,12 @@ const analysisStages = [
   { label: "运行混合模型", detail: "融合 Elo 与攻防匹配", icon: BrainCircuit },
   { label: "校准最终概率", detail: "检查模型分歧与可信度", icon: ShieldCheck },
 ];
+
+const formatMatchDate = (date: string) =>
+  new Intl.DateTimeFormat("zh-CN", { month: "long", day: "numeric", weekday: "short" }).format(
+    new Date(`${date}T12:00:00+08:00`),
+  );
+const confidenceLabel = (confidence: number) => (confidence >= 80 ? "较高" : confidence >= 65 ? "中等" : "偏低");
 
 function CountUpNumber({ value, suffix = "%" }: { value: number; suffix?: string }) {
   const [display, setDisplay] = useState(0);
@@ -69,7 +76,7 @@ function TeamMark({ team, large = false }: { team: Team; large?: boolean }) {
       </div>
       <div className="text-center">
         <p className={cn("font-bold", large ? "text-xl" : "text-sm")}>{team.name}</p>
-        <p className="text-xs text-muted-foreground">世界排名 {team.rank}</p>
+        <p className="text-xs text-muted-foreground">Group {team.group}</p>
       </div>
     </div>
   );
@@ -94,7 +101,7 @@ function FeaturedMatch({ match, onPredict }: { match: Match; onPredict: (home: T
     <Card className="featured-card relative overflow-hidden border-white/10 bg-card/85 py-0">
       <CardContent className="flex flex-col gap-5 p-5">
         <div className="flex items-center justify-between text-xs text-muted-foreground">
-          <span>小组赛 · {match.group}组 · 第2轮</span>
+          <span>2026 世界杯 · {match.group}组 · {match.city}</span>
           <Badge variant="outline" className="border-orange-400/30 text-orange-300">
             <Flame data-icon="inline-start" /> 爆冷 {result.upsetRisk}%
           </Badge>
@@ -103,7 +110,7 @@ function FeaturedMatch({ match, onPredict }: { match: Match; onPredict: (home: T
           <TeamMark team={home} large />
           <div className="flex flex-col items-center gap-1">
             <span className="font-mono text-3xl font-black italic">VS</span>
-            <span className="text-sm text-muted-foreground">今天 {match.time}</span>
+            <span className="text-center text-xs text-muted-foreground">{formatMatchDate(match.date)}<br />开球时间待确认</span>
           </div>
           <TeamMark team={away} large />
         </div>
@@ -118,7 +125,7 @@ function FeaturedMatch({ match, onPredict }: { match: Match; onPredict: (home: T
         <div className="grid grid-cols-[1fr_auto] items-center gap-4 rounded-2xl border border-cyan-400/10 bg-cyan-400/5 p-4">
           <div>
             <div className="flex items-center gap-2 text-sm font-semibold"><ShieldCheck className="text-cyan-300" /> 模型可信度</div>
-            <div className="mt-2 flex items-end gap-2"><strong className="text-3xl text-cyan-300">{result.confidence}%</strong><span className="pb-1 text-xs text-muted-foreground">5 个模型方向一致</span></div>
+            <div className="mt-2 flex items-end gap-2"><strong className="text-3xl text-cyan-300">{result.confidence}%</strong><span className="pb-1 text-xs text-muted-foreground">历史特征与模型综合评估</span></div>
           </div>
           <CircleGauge className="size-12 text-cyan-300" strokeWidth={1.4} />
         </div>
@@ -137,7 +144,7 @@ function MatchRow({ match, onPredict }: { match: Match; onPredict: (home: Team, 
   return (
     <button onClick={() => onPredict(home, away)} className="group grid w-full grid-cols-[56px_1fr_auto] items-center gap-3 rounded-2xl border border-white/8 bg-card/55 p-3 text-left transition hover:border-primary/40 hover:bg-card">
       <div>
-        <p className="font-mono font-bold">{match.time}</p>
+        <p className="text-xs font-bold">时间待定</p>
         <p className="text-xs text-muted-foreground">{match.group}组</p>
       </div>
       <div className="flex flex-col gap-2">
@@ -155,33 +162,39 @@ function MatchRow({ match, onPredict }: { match: Match; onPredict: (home: Team, 
 }
 
 function TodayView({ onPredict }: { onPredict: (home: Team, away: Team) => void }) {
+  const [selectedDate, setSelectedDate] = useState(availableMatchDates[0]);
+  const selectedMatches = matches.filter((match) => match.date === selectedDate);
+
   return (
     <div className="flex flex-col gap-7">
       <header className="flex items-start justify-between">
-        <div><h1 className="text-xl font-black tracking-tight">世界杯预测实验室</h1><p className="mt-1 text-xs text-muted-foreground"><span className="mr-1 text-primary">●</span> 数据已更新 · 10分钟前</p></div>
+        <div><h1 className="text-xl font-black tracking-tight">世界杯预测实验室</h1><p className="mt-1 text-xs text-muted-foreground"><span className="mr-1 text-primary">●</span> 已接入 {scheduleMetadata.matchCount} 场确定小组赛</p></div>
         <Button variant="outline" size="icon" className="rounded-full border-white/10 bg-white/5"><Info /></Button>
       </header>
-      <section><h2 className="max-w-xs text-4xl font-black leading-tight tracking-tight">今天该看哪场？<span className="text-primary">↗</span></h2></section>
+      <section className="flex flex-col gap-3"><h2 className="max-w-xs text-4xl font-black leading-tight tracking-tight">今天该看哪场？<span className="text-primary">↗</span></h2><p className="text-sm text-muted-foreground">今天暂无世界杯比赛，已为你定位到首个确定比赛日。</p><label className="flex items-center justify-between rounded-2xl border border-white/10 bg-card/60 p-3 text-sm"><span className="font-semibold">手动选择日期</span><select aria-label="选择比赛日期" value={selectedDate} onChange={(event) => setSelectedDate(event.target.value)} className="rounded-xl border border-white/10 bg-background px-3 py-2 text-sm">{availableMatchDates.map((date) => <option key={date} value={date}>{formatMatchDate(date)}</option>)}</select></label></section>
       <div className="flex gap-2 overflow-x-auto pb-1">
         <Badge className="h-9 shrink-0 px-4"><Radar data-icon="inline-start" /> 今日最值得看</Badge>
         <Badge variant="outline" className="h-9 shrink-0 border-orange-400/30 px-4 text-orange-300"><Flame data-icon="inline-start" /> 最大爆冷可能</Badge>
         <Badge variant="outline" className="h-9 shrink-0 border-white/10 px-4"><ShieldCheck data-icon="inline-start" /> 强队稳胆</Badge>
       </div>
-      <FeaturedMatch match={matches[1]} onPredict={onPredict} />
+      <div className="flex items-center justify-between text-xs text-muted-foreground"><span>{formatMatchDate(selectedDate)}精选</span><span>左右滑动查看 {selectedMatches.length} 场 →</span></div>
+      <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2">
+        {selectedMatches.map((match) => <div key={match.id} className="w-[calc(100vw-2rem)] max-w-xl shrink-0 snap-center"><FeaturedMatch match={match} onPredict={onPredict} /></div>)}
+      </div>
       <section className="flex flex-col gap-3">
-        <div className="flex items-end justify-between"><div><h2 className="text-xl font-bold">今日比赛</h2><p className="text-xs text-muted-foreground">均为北京时间</p></div><span className="text-sm text-muted-foreground">共 {matches.length} 场</span></div>
-        {matches.map((match) => <MatchRow key={match.id} match={match} onPredict={onPredict} />)}
+        <div className="flex items-end justify-between"><div><h2 className="text-xl font-bold">{formatMatchDate(selectedDate)}比赛</h2><p className="text-xs text-muted-foreground">开球时间尚未从可靠来源确认</p></div><span className="text-sm text-muted-foreground">共 {selectedMatches.length} 场</span></div>
+        {selectedMatches.map((match) => <MatchRow key={match.id} match={match} onPredict={onPredict} />)}
       </section>
     </div>
   );
 }
 
-function GroupsView({ onSelect }: { onSelect: (team: Team) => void }) {
+function GroupsView({ selectedTeam, onSelect, onClear }: { selectedTeam: Team | null; onSelect: (team: Team) => void; onClear: () => void }) {
   const [activeGroup, setActiveGroup] = useState("C");
   const group = groups.find((item) => item.name === activeGroup)!;
   return (
     <div className="flex flex-col gap-6">
-      <header><h1 className="text-3xl font-black">小组强度</h1><p className="mt-2 text-sm text-muted-foreground">选择两支球队，直接运行对阵预测。</p></header>
+      <header><h1 className="text-3xl font-black">小组强度</h1><p className="mt-2 text-sm text-muted-foreground">{selectedTeam ? `已选择 ${selectedTeam.name}，再选择一支球队开始预测。` : "先选择一支球队，再选择它的预测对手。"}</p>{selectedTeam ? <Button variant="outline" size="sm" className="mt-3" onClick={onClear}>清除已选球队</Button> : null}</header>
       <div className="flex gap-2 overflow-x-auto pb-1">
         {groups.map((item) => <Button key={item.name} variant={activeGroup === item.name ? "default" : "outline"} size="sm" onClick={() => setActiveGroup(item.name)}>Group {item.name}</Button>)}
       </div>
@@ -194,8 +207,8 @@ function GroupsView({ onSelect }: { onSelect: (team: Team) => void }) {
       </Card>
       <div className="grid grid-cols-2 gap-3">
         {group.teams.map((team) => (
-          <button key={team.id} onClick={() => onSelect(team)} className="flex flex-col items-start gap-4 rounded-3xl border border-white/8 bg-card/60 p-4 text-left transition hover:border-primary/50">
-            <span className="text-4xl">{team.flag}</span><div><p className="text-lg font-bold">{team.name}</p><p className="text-xs text-muted-foreground">Elo {team.elo} · 状态 {team.form}</p></div><span className="text-xs font-semibold text-primary">选择预测 →</span>
+          <button key={team.id} onClick={() => onSelect(team)} className={cn("flex flex-col items-start gap-4 rounded-3xl border bg-card/60 p-4 text-left transition hover:border-primary/50", selectedTeam?.id === team.id ? "border-primary bg-primary/8 shadow-[0_0_24px_rgba(190,255,0,.1)]" : "border-white/8")}>
+            <span className="text-4xl">{team.flag}</span><div><p className="text-lg font-bold">{team.name}</p><p className="text-xs text-muted-foreground">{getTeamHistory(team.id)?.matchesAvailable.toLocaleString() ?? 0} 场历史比赛</p></div><span className="text-xs font-semibold text-primary">{selectedTeam?.id === team.id ? "已选择 1/2" : "选择预测 →"}</span>
           </button>
         ))}
       </div>
@@ -206,16 +219,20 @@ function GroupsView({ onSelect }: { onSelect: (team: Team) => void }) {
 function PredictView({ initialHome, initialAway }: { initialHome: Team; initialAway: Team }) {
   const [homeId, setHomeId] = useState(initialHome.id);
   const [awayId, setAwayId] = useState(initialAway.id);
-  const [historyWeight, setHistoryWeight] = useState(15);
+  const [modelWeights, setModelWeights] = useState<ModelWeights>(defaultModelWeights);
+  const [selectedFactor, setSelectedFactor] = useState<Prediction["factors"][number] | null>(null);
   const [phase, setPhase] = useState<PredictionPhase>("idle");
   const [activeStage, setActiveStage] = useState(0);
   const home = teamById.get(homeId)!;
   const away = teamById.get(awayId)!;
-  const result = useMemo(() => predictMatch(home, away, historyWeight), [home, away, historyWeight]);
+  const result = useMemo(() => predictMatch(home, away, modelWeights), [home, away, modelWeights]);
 
   useEffect(() => {
     if (phase !== "analyzing") return;
 
+    const scrollTimer = window.setTimeout(() => {
+      document.getElementById("analysis-progress")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 120);
     const stageTimers = analysisStages.slice(1).map((_, index) =>
       window.setTimeout(() => setActiveStage(index + 1), (index + 1) * 720),
     );
@@ -228,6 +245,7 @@ function PredictView({ initialHome, initialAway }: { initialHome: Team; initialA
 
     return () => {
       stageTimers.forEach(window.clearTimeout);
+      window.clearTimeout(scrollTimer);
       window.clearTimeout(resultTimer);
     };
   }, [phase]);
@@ -243,6 +261,19 @@ function PredictView({ initialHome, initialAway }: { initialHome: Team; initialA
     setPhase("analyzing");
   };
 
+  const updateWeight = (key: keyof ModelWeights, value: number | readonly number[]) => {
+    setModelWeights((current) => ({ ...current, [key]: typeof value === "number" ? value : value[0] }));
+    setPhase("idle");
+  };
+
+  const weightControls: { id: keyof ModelWeights; label: string; description: string }[] = [
+    { id: "elo", label: "长期实力", description: "历史比赛累计形成的 Elo 基础实力" },
+    { id: "form", label: "近期状态", description: "按对手强弱校正的最近比赛表现" },
+    { id: "matchup", label: "攻防匹配", description: "近期进球与失球形成的攻防特征" },
+    { id: "history", label: "历史交锋", description: "采用时间衰减与样本收缩的直接交锋" },
+  ];
+  const rawWeightTotal = Object.values(modelWeights).reduce((sum, weight) => sum + weight, 0) || 1;
+
   return (
     <div className="flex flex-col gap-6">
       <header><h1 className="text-3xl font-black">对阵预测</h1><p className="mt-2 text-sm text-muted-foreground">混合 Elo、近期状态、攻防与历史交锋。</p></header>
@@ -253,13 +284,21 @@ function PredictView({ initialHome, initialAway }: { initialHome: Team; initialA
           <div className="flex flex-col gap-3"><TeamMark team={away} large /><select aria-label="选择客队" value={awayId} onChange={(event) => selectTeam("away", event.target.value)} className="rounded-xl border border-white/10 bg-background p-2 text-sm">{teams.filter((team) => team.id !== homeId).map((team) => <option key={team.id} value={team.id}>{team.name}</option>)}</select></div>
         </CardContent>
       </Card>
-      <Card className="border-white/8 bg-card/55"><CardContent className="flex flex-col gap-3 p-4"><div className="flex justify-between text-sm"><span>历史交锋权重</span><strong className="text-primary">{historyWeight}%</strong></div><Slider value={[historyWeight]} min={5} max={25} step={1} disabled={phase === "analyzing"} onValueChange={(value) => { setHistoryWeight(typeof value === "number" ? value : value[0]); setPhase("idle"); }} /><p className="text-xs text-muted-foreground">越近期的比赛权重越高；样本不足时自动向整体实力收缩。</p></CardContent></Card>
+      <Card className="border-white/8 bg-card/55">
+        <CardHeader className="pb-2"><CardTitle className="flex items-center justify-between text-base"><span>模型权重实验室</span><Button variant="outline" size="sm" onClick={() => { setModelWeights(defaultModelWeights); setPhase("idle"); }}>恢复默认</Button></CardTitle><p className="text-xs text-muted-foreground">拖动相对权重，模型会自动归一化并重新计算。</p></CardHeader>
+        <CardContent className="flex flex-col gap-5 p-4 pt-1">
+          {weightControls.map((control) => {
+            const normalized = Math.round((modelWeights[control.id] / rawWeightTotal) * 100);
+            return <div key={control.id} className="flex flex-col gap-2"><div className="flex items-start justify-between gap-4"><div><p className="text-sm font-semibold">{control.label}</p><p className="text-xs text-muted-foreground">{control.description}</p></div><Badge variant="outline" className="shrink-0 border-primary/25 text-primary">{normalized}%</Badge></div><Slider aria-label={`${control.label}权重`} value={[modelWeights[control.id]]} min={0} max={100} step={5} disabled={phase === "analyzing"} onValueChange={(value) => updateWeight(control.id, value)} /></div>;
+          })}
+        </CardContent>
+      </Card>
       <Button size="lg" className="h-14 text-base font-bold shadow-[0_0_32px_rgba(190,255,0,.16)]" disabled={phase === "analyzing"} onClick={runPrediction}>
         {phase === "analyzing" ? <LoaderCircle className="animate-spin" data-icon="inline-start" /> : <Sparkles data-icon="inline-start" />}
         {phase === "analyzing" ? "模型分析中..." : phase === "result" ? "重新运行预测" : "开始预测"}
       </Button>
       {phase === "analyzing" ? (
-        <Card className="analysis-card overflow-hidden border-cyan-400/20 bg-cyan-400/5">
+        <Card id="analysis-progress" className="analysis-card scroll-mt-5 overflow-hidden border-cyan-400/20 bg-cyan-400/5">
           <CardContent className="flex flex-col gap-5 p-5">
             <div className="relative mx-auto grid size-24 place-items-center rounded-full border border-cyan-300/20 bg-cyan-300/5">
               <div className="analysis-orbit absolute inset-2 rounded-full border border-dashed border-primary/40" />
@@ -299,12 +338,27 @@ function PredictView({ initialHome, initialAway }: { initialHome: Team; initialA
                 <div><strong className="result-number text-4xl text-orange-400"><CountUpNumber value={result.away} /></strong><p className="mt-1 text-xs text-muted-foreground">{away.name}胜</p></div>
               </div>
               <ProbabilityBar home={result.home} draw={result.draw} away={result.away} />
-              <div className="flex items-center justify-between rounded-xl border border-cyan-300/10 bg-black/25 p-3"><span className="text-sm">模型可信度</span><strong className="text-lg text-cyan-300"><CountUpNumber value={result.confidence} /> · 较高</strong></div>
+              <div className="flex items-center justify-between rounded-xl border border-cyan-300/10 bg-black/25 p-3"><span className="text-sm">模型可信度</span><strong className="text-lg text-cyan-300"><CountUpNumber value={result.confidence} /> · {confidenceLabel(result.confidence)}</strong></div>
+              <p className="text-xs leading-relaxed text-muted-foreground">当前为历史数据模型，尚未接入赛前赔率、最终阵容与伤停信息。</p>
             </CardContent>
           </Card>
-          <section><h2 className="mb-3 text-lg font-bold">决定结果的因素</h2><div className="flex flex-col gap-2">{result.factors.map((factor) => <div key={factor.label} className="flex items-center justify-between gap-3 rounded-2xl border border-white/8 bg-card/50 p-4"><div><p className="font-semibold">{factor.label}</p><p className="text-xs text-muted-foreground">{factor.value}</p></div><Badge variant="outline" className={factor.impact === "home" ? "shrink-0 border-primary/30 text-primary" : factor.impact === "away" ? "shrink-0 border-orange-400/30 text-orange-300" : "shrink-0 border-cyan-300/30 text-cyan-300"}>{factor.impact === "home" ? home.name : factor.impact === "away" ? away.name : "均衡"}</Badge></div>)}</div></section>
+          <section><h2 className="mb-3 text-lg font-bold">决定结果的因素</h2><div className="flex flex-col gap-2">{result.factors.map((factor) => <button type="button" onClick={() => setSelectedFactor(factor)} key={factor.label} className="flex items-center justify-between gap-3 rounded-2xl border border-white/8 bg-card/50 p-4 text-left transition hover:border-primary/35"><div><p className="font-semibold">{factor.label} <span className="text-primary">→</span></p><p className="text-xs text-muted-foreground">{factor.value}</p></div><Badge variant="outline" className={factor.impact === "home" ? "shrink-0 border-primary/30 text-primary" : factor.impact === "away" ? "shrink-0 border-orange-400/30 text-orange-300" : "shrink-0 border-cyan-300/30 text-cyan-300"}>{factor.impact === "home" ? home.name : factor.impact === "away" ? away.name : "均衡"}</Badge></button>)}</div></section>
         </div>
       ) : null}
+      <Drawer open={selectedFactor !== null} onOpenChange={(open) => { if (!open) setSelectedFactor(null); }}>
+        <DrawerContent className="border-white/10 bg-popover/98">
+          <DrawerHeader className="text-left">
+            <DrawerTitle className="text-xl font-bold">{selectedFactor?.label}</DrawerTitle>
+            <DrawerDescription>{selectedFactor?.value}</DrawerDescription>
+          </DrawerHeader>
+          <div className="overflow-y-auto px-4 pb-8">
+            <div className="rounded-2xl border border-white/8 bg-card/60 p-4">
+              <p className="text-sm leading-7 text-muted-foreground">{selectedFactor?.detail}</p>
+            </div>
+            <p className="mt-4 text-xs text-muted-foreground">点击并调整上方模型权重，可以观察该因素对最终概率的影响。</p>
+          </div>
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 }
@@ -312,23 +366,32 @@ function PredictView({ initialHome, initialAway }: { initialHome: Team; initialA
 export function WorldCupApp() {
   const [view, setView] = useState<View>("today");
   const [selected, setSelected] = useState<[Team, Team]>([teamById.get("bra")!, teamById.get("mar")!]);
+  const [pendingTeam, setPendingTeam] = useState<Team | null>(null);
 
   const startPrediction = (home: Team, away: Team) => {
     setSelected([home, away]);
+    setPendingTeam(null);
     setView("predict");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const selectFromGroup = (team: Team) => {
-    const opponent = teams.find((item) => item.group === team.group && item.id !== team.id) ?? teams[0];
-    startPrediction(team, opponent);
+    if (!pendingTeam) {
+      setPendingTeam(team);
+      return;
+    }
+    if (pendingTeam.id === team.id) {
+      setPendingTeam(null);
+      return;
+    }
+    startPrediction(pendingTeam, team);
   };
 
   return (
     <main className="stadium-grid min-h-screen bg-background pb-28 text-foreground">
       <div className="mx-auto w-full max-w-xl px-4 py-6 md:max-w-3xl md:px-8 md:py-10">
         {view === "today" ? <TodayView onPredict={startPrediction} /> : null}
-        {view === "groups" ? <GroupsView onSelect={selectFromGroup} /> : null}
+        {view === "groups" ? <GroupsView selectedTeam={pendingTeam} onSelect={selectFromGroup} onClear={() => setPendingTeam(null)} /> : null}
         {view === "predict" ? <PredictView key={`${selected[0].id}-${selected[1].id}`} initialHome={selected[0]} initialAway={selected[1]} /> : null}
         {view === "more" ? <div className="flex flex-col gap-5"><h1 className="text-3xl font-black">更多数据</h1><Card><CardContent className="p-5"><h2 className="font-bold">历史数据已接入</h2><p className="mt-2 text-sm text-muted-foreground">本地历史库包含 {historyMetadata.totalPlayedMatches.toLocaleString()} 场已完赛国家队比赛，数据截止 {historyMetadata.latestPlayedDate}。</p><div className="mt-4 flex flex-wrap gap-2"><Badge variant="outline">来源：martj42/international_results</Badge><Badge variant="outline">许可：CC0-1.0</Badge><Badge variant="outline">近期半衰期：{historyMetadata.recencyHalfLifeYears} 年</Badge></div></CardContent></Card><Card><CardContent className="p-5"><h2 className="font-bold">模型过去表现</h2><p className="mt-2 text-sm text-muted-foreground">时间切分回测与 Brier Score 将在下一阶段接入。</p></CardContent></Card></div> : null}
       </div>

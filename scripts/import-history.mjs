@@ -9,18 +9,55 @@ const halfLifeDays = 365.25 * 2.5;
 const recentMatchLimit = 20;
 
 const teamNames = {
+  alg: "Algeria",
   arg: "Argentina",
   aus: "Australia",
+  aut: "Austria",
+  bel: "Belgium",
+  bih: "Bosnia and Herzegovina",
   bra: "Brazil",
+  can: "Canada",
+  cpv: "Cape Verde",
+  col: "Colombia",
+  cod: "DR Congo",
   cro: "Croatia",
+  cuw: "Curaçao",
+  cze: "Czech Republic",
+  ecu: "Ecuador",
+  egy: "Egypt",
+  eng: "England",
   fra: "France",
   ger: "Germany",
+  gha: "Ghana",
+  hai: "Haiti",
+  irn: "Iran",
+  irq: "Iraq",
+  civ: "Ivory Coast",
   jpn: "Japan",
+  jor: "Jordan",
   kor: "South Korea",
   mar: "Morocco",
   mex: "Mexico",
+  ned: "Netherlands",
+  nzl: "New Zealand",
   nga: "Nigeria",
+  nor: "Norway",
+  pan: "Panama",
+  par: "Paraguay",
+  por: "Portugal",
+  qat: "Qatar",
+  ksa: "Saudi Arabia",
+  sen: "Senegal",
   sco: "Scotland",
+  rsa: "South Africa",
+  esp: "Spain",
+  swe: "Sweden",
+  sui: "Switzerland",
+  tun: "Tunisia",
+  tur: "Turkey",
+  usa: "United States",
+  uru: "Uruguay",
+  uzb: "Uzbekistan",
 };
 
 const playedMatches = [];
@@ -53,6 +90,7 @@ playedMatches.sort((a, b) => a.date.localeCompare(b.date));
 const latestPlayedDate = playedMatches.at(-1)?.date;
 if (!latestPlayedDate) throw new Error("No played matches found in source data.");
 const referenceTime = Date.parse(`${latestPlayedDate}T00:00:00Z`);
+const eloRatings = new Map();
 
 function tournamentWeight(tournament) {
   if (tournament === "FIFA World Cup") return 1.35;
@@ -69,6 +107,21 @@ function recencyWeight(date) {
 
 function matchWeight(match) {
   return recencyWeight(match.date) * tournamentWeight(match.tournament);
+}
+
+function getElo(teamName) {
+  return eloRatings.get(teamName) ?? 1500;
+}
+
+for (const match of playedMatches) {
+  const homeElo = getElo(match.homeTeam);
+  const awayElo = getElo(match.awayTeam);
+  const homeAdvantage = match.neutral ? 0 : 70;
+  const expectedHome = 1 / (1 + 10 ** (-(homeElo + homeAdvantage - awayElo) / 400));
+  const actualHome = match.homeScore > match.awayScore ? 1 : match.homeScore < match.awayScore ? 0 : 0.5;
+  const change = 22 * tournamentWeight(match.tournament) * (actualHome - expectedHome);
+  eloRatings.set(match.homeTeam, homeElo + change);
+  eloRatings.set(match.awayTeam, awayElo - change);
 }
 
 function withoutWeight(match) {
@@ -95,6 +148,7 @@ function teamPerspective(match, teamName) {
     result: goalsFor > goalsAgainst ? "W" : goalsFor < goalsAgainst ? "L" : "D",
     tournament: match.tournament,
     neutral: match.neutral,
+    isHome,
     weight: matchWeight(match),
   };
 }
@@ -109,6 +163,12 @@ function buildTeamFeature(id, teamName) {
   const weightedPoints = recent.reduce((sum, match) => sum + match.weight * (match.result === "W" ? 3 : match.result === "D" ? 1 : 0), 0);
   const weightedGoalsFor = recent.reduce((sum, match) => sum + match.weight * match.goalsFor, 0) / totalWeight;
   const weightedGoalsAgainst = recent.reduce((sum, match) => sum + match.weight * match.goalsAgainst, 0) / totalWeight;
+  const weightedPerformanceResidual = recent.reduce((sum, match) => {
+    const venueAdjustment = match.neutral ? 0 : match.isHome ? 70 : -70;
+    const expected = 1 / (1 + 10 ** (-(getElo(teamName) + venueAdjustment - getElo(match.opponent)) / 400));
+    const actual = match.result === "W" ? 1 : match.result === "D" ? 0.5 : 0;
+    return sum + match.weight * (actual - expected);
+  }, 0) / totalWeight;
 
   return {
     id,
@@ -116,7 +176,9 @@ function buildTeamFeature(id, teamName) {
     matchesAvailable: matches.length,
     recentMatchesUsed: recent.length,
     lastMatchDate: matches[0]?.date ?? null,
+    eloRating: Math.round(getElo(teamName)),
     formScore: Math.round((weightedPoints / (3 * totalWeight)) * 100),
+    adjustedFormScore: Math.round(Math.max(0, Math.min(100, 50 + weightedPerformanceResidual * 75))),
     attackScore: Math.round(Math.min(100, 45 + weightedGoalsFor * 22)),
     defenseScore: Math.round(Math.max(0, 100 - weightedGoalsAgainst * 27)),
     recentRecord: {

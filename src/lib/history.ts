@@ -4,7 +4,9 @@ export type TeamHistoryFeature = {
   matchesAvailable: number;
   recentMatchesUsed: number;
   lastMatchDate: string | null;
+  eloRating: number;
   formScore: number;
+  adjustedFormScore: number;
   attackScore: number;
   defenseScore: number;
   recentRecord: {

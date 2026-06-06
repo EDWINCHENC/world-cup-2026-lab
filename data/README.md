@@ -21,3 +21,16 @@ The import script parses the raw CSV, applies tournament importance and a 2.5-ye
 recency half-life, then writes browser-ready features to:
 
 `src/data/history-features.json`
+
+## 2026 schedule
+
+`npm run data:schedule` extracts the 72 confirmed group-stage fixtures and all
+12 groups from the local source into `src/data/world-cup-2026-schedule.json`.
+
+The fixtures and dates have been cross-checked against FIFA's official schedule:
+
+https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums
+
+Kick-off times are already published by FIFA, but are not present in the current
+local source. The UI deliberately labels them as pending until an official
+time-aware import is added.

@@ -1,0 +1,878 @@
+{
+  "metadata": {
+    "source": "martj42/international_results",
+    "competition": "FIFA World Cup",
+    "edition": 2026,
+    "stage": "Group stage",
+    "kickoffTimesAvailable": false,
+    "matchCount": 72
+  },
+  "groups": {
+    "A": [
+      "Mexico",
+      "South Africa",
+      "South Korea",
+      "Czech Republic"
+    ],
+    "B": [
+      "Canada",
+      "Bosnia and Herzegovina",
+      "Qatar",
+      "Switzerland"
+    ],
+    "C": [
+      "Brazil",
+      "Morocco",
+      "Haiti",
+      "Scotland"
+    ],
+    "D": [
+      "United States",
+      "Paraguay",
+      "Australia",
+      "Turkey"
+    ],
+    "E": [
+      "Germany",
+      "Curaçao",
+      "Ivory Coast",
+      "Ecuador"
+    ],
+    "F": [
+      "Netherlands",
+      "Japan",
+      "Sweden",
+      "Tunisia"
+    ],
+    "G": [
+      "Belgium",
+      "Egypt",
+      "Iran",
+      "New Zealand"
+    ],
+    "H": [
+      "Spain",
+      "Cape Verde",
+      "Saudi Arabia",
+      "Uruguay"
+    ],
+    "I": [
+      "France",
+      "Senegal",
+      "Iraq",
+      "Norway"
+    ],
+    "J": [
+      "Argentina",
+      "Algeria",
+      "Austria",
+      "Jordan"
+    ],
+    "K": [
+      "Portugal",
+      "DR Congo",
+      "Uzbekistan",
+      "Colombia"
+    ],
+    "L": [
+      "England",
+      "Croatia",
+      "Ghana",
+      "Panama"
+    ]
+  },
+  "matches": [
+    {
+      "id": "wc26-1",
+      "date": "2026-06-11",
+      "group": "A",
+      "homeSourceName": "Mexico",
+      "awaySourceName": "South Africa",
+      "city": "Mexico City",
+      "country": "Mexico",
+      "neutral": false,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-2",
+      "date": "2026-06-11",
+      "group": "A",
+      "homeSourceName": "South Korea",
+      "awaySourceName": "Czech Republic",
+      "city": "Zapopan",
+      "country": "Mexico",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-3",
+      "date": "2026-06-12",
+      "group": "B",
+      "homeSourceName": "Canada",
+      "awaySourceName": "Bosnia and Herzegovina",
+      "city": "Toronto",
+      "country": "Canada",
+      "neutral": false,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-4",
+      "date": "2026-06-12",
+      "group": "D",
+      "homeSourceName": "United States",
+      "awaySourceName": "Paraguay",
+      "city": "Inglewood",
+      "country": "United States",
+      "neutral": false,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-5",
+      "date": "2026-06-13",
+      "group": "B",
+      "homeSourceName": "Qatar",
+      "awaySourceName": "Switzerland",
+      "city": "Santa Clara",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-6",
+      "date": "2026-06-13",
+      "group": "C",
+      "homeSourceName": "Brazil",
+      "awaySourceName": "Morocco",
+      "city": "East Rutherford",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-7",
+      "date": "2026-06-13",
+      "group": "C",
+      "homeSourceName": "Haiti",
+      "awaySourceName": "Scotland",
+      "city": "Foxborough",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-8",
+      "date": "2026-06-13",
+      "group": "D",
+      "homeSourceName": "Australia",
+      "awaySourceName": "Turkey",
+      "city": "Vancouver",
+      "country": "Canada",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-9",
+      "date": "2026-06-14",
+      "group": "E",
+      "homeSourceName": "Germany",
+      "awaySourceName": "Curaçao",
+      "city": "Houston",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-10",
+      "date": "2026-06-14",
+      "group": "E",
+      "homeSourceName": "Ivory Coast",
+      "awaySourceName": "Ecuador",
+      "city": "Philadelphia",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-11",
+      "date": "2026-06-14",
+      "group": "F",
+      "homeSourceName": "Netherlands",
+      "awaySourceName": "Japan",
+      "city": "Arlington",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-12",
+      "date": "2026-06-14",
+      "group": "F",
+      "homeSourceName": "Sweden",
+      "awaySourceName": "Tunisia",
+      "city": "Guadalupe",
+      "country": "Mexico",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-13",
+      "date": "2026-06-15",
+      "group": "G",
+      "homeSourceName": "Belgium",
+      "awaySourceName": "Egypt",
+      "city": "Seattle",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-14",
+      "date": "2026-06-15",
+      "group": "G",
+      "homeSourceName": "Iran",
+      "awaySourceName": "New Zealand",
+      "city": "Inglewood",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-15",
+      "date": "2026-06-15",
+      "group": "H",
+      "homeSourceName": "Spain",
+      "awaySourceName": "Cape Verde",
+      "city": "Atlanta",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-16",
+      "date": "2026-06-15",
+      "group": "H",
+      "homeSourceName": "Saudi Arabia",
+      "awaySourceName": "Uruguay",
+      "city": "Miami Gardens",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-17",
+      "date": "2026-06-16",
+      "group": "I",
+      "homeSourceName": "France",
+      "awaySourceName": "Senegal",
+      "city": "East Rutherford",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-18",
+      "date": "2026-06-16",
+      "group": "I",
+      "homeSourceName": "Iraq",
+      "awaySourceName": "Norway",
+      "city": "Foxborough",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-19",
+      "date": "2026-06-16",
+      "group": "J",
+      "homeSourceName": "Argentina",
+      "awaySourceName": "Algeria",
+      "city": "Kansas City",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-20",
+      "date": "2026-06-16",
+      "group": "J",
+      "homeSourceName": "Austria",
+      "awaySourceName": "Jordan",
+      "city": "Santa Clara",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-21",
+      "date": "2026-06-17",
+      "group": "K",
+      "homeSourceName": "Portugal",
+      "awaySourceName": "DR Congo",
+      "city": "Houston",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-22",
+      "date": "2026-06-17",
+      "group": "K",
+      "homeSourceName": "Uzbekistan",
+      "awaySourceName": "Colombia",
+      "city": "Mexico City",
+      "country": "Mexico",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-23",
+      "date": "2026-06-17",
+      "group": "L",
+      "homeSourceName": "England",
+      "awaySourceName": "Croatia",
+      "city": "Arlington",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-24",
+      "date": "2026-06-17",
+      "group": "L",
+      "homeSourceName": "Ghana",
+      "awaySourceName": "Panama",
+      "city": "Toronto",
+      "country": "Canada",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-25",
+      "date": "2026-06-18",
+      "group": "A",
+      "homeSourceName": "Czech Republic",
+      "awaySourceName": "South Africa",
+      "city": "Atlanta",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-26",
+      "date": "2026-06-18",
+      "group": "A",
+      "homeSourceName": "Mexico",
+      "awaySourceName": "South Korea",
+      "city": "Zapopan",
+      "country": "Mexico",
+      "neutral": false,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-27",
+      "date": "2026-06-18",
+      "group": "B",
+      "homeSourceName": "Switzerland",
+      "awaySourceName": "Bosnia and Herzegovina",
+      "city": "Inglewood",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-28",
+      "date": "2026-06-18",
+      "group": "B",
+      "homeSourceName": "Canada",
+      "awaySourceName": "Qatar",
+      "city": "Vancouver",
+      "country": "Canada",
+      "neutral": false,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-29",
+      "date": "2026-06-19",
+      "group": "C",
+      "homeSourceName": "Scotland",
+      "awaySourceName": "Morocco",
+      "city": "Foxborough",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-30",
+      "date": "2026-06-19",
+      "group": "C",
+      "homeSourceName": "Brazil",
+      "awaySourceName": "Haiti",
+      "city": "Philadelphia",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-31",
+      "date": "2026-06-19",
+      "group": "D",
+      "homeSourceName": "United States",
+      "awaySourceName": "Australia",
+      "city": "Seattle",
+      "country": "United States",
+      "neutral": false,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-32",
+      "date": "2026-06-19",
+      "group": "D",
+      "homeSourceName": "Turkey",
+      "awaySourceName": "Paraguay",
+      "city": "Santa Clara",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-33",
+      "date": "2026-06-20",
+      "group": "E",
+      "homeSourceName": "Germany",
+      "awaySourceName": "Ivory Coast",
+      "city": "Toronto",
+      "country": "Canada",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-34",
+      "date": "2026-06-20",
+      "group": "E",
+      "homeSourceName": "Ecuador",
+      "awaySourceName": "Curaçao",
+      "city": "Kansas City",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-35",
+      "date": "2026-06-20",
+      "group": "F",
+      "homeSourceName": "Netherlands",
+      "awaySourceName": "Sweden",
+      "city": "Houston",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-36",
+      "date": "2026-06-20",
+      "group": "F",
+      "homeSourceName": "Tunisia",
+      "awaySourceName": "Japan",
+      "city": "Guadalupe",
+      "country": "Mexico",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-37",
+      "date": "2026-06-21",
+      "group": "G",
+      "homeSourceName": "Belgium",
+      "awaySourceName": "Iran",
+      "city": "Inglewood",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-38",
+      "date": "2026-06-21",
+      "group": "G",
+      "homeSourceName": "New Zealand",
+      "awaySourceName": "Egypt",
+      "city": "Vancouver",
+      "country": "Canada",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-39",
+      "date": "2026-06-21",
+      "group": "H",
+      "homeSourceName": "Spain",
+      "awaySourceName": "Saudi Arabia",
+      "city": "Atlanta",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-40",
+      "date": "2026-06-21",
+      "group": "H",
+      "homeSourceName": "Uruguay",
+      "awaySourceName": "Cape Verde",
+      "city": "Miami Gardens",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-41",
+      "date": "2026-06-22",
+      "group": "I",
+      "homeSourceName": "France",
+      "awaySourceName": "Iraq",
+      "city": "Philadelphia",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-42",
+      "date": "2026-06-22",
+      "group": "I",
+      "homeSourceName": "Norway",
+      "awaySourceName": "Senegal",
+      "city": "East Rutherford",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-43",
+      "date": "2026-06-22",
+      "group": "J",
+      "homeSourceName": "Argentina",
+      "awaySourceName": "Austria",
+      "city": "Arlington",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-44",
+      "date": "2026-06-22",
+      "group": "J",
+      "homeSourceName": "Jordan",
+      "awaySourceName": "Algeria",
+      "city": "Santa Clara",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-45",
+      "date": "2026-06-23",
+      "group": "K",
+      "homeSourceName": "Portugal",
+      "awaySourceName": "Uzbekistan",
+      "city": "Houston",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-46",
+      "date": "2026-06-23",
+      "group": "K",
+      "homeSourceName": "Colombia",
+      "awaySourceName": "DR Congo",
+      "city": "Zapopan",
+      "country": "Mexico",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-47",
+      "date": "2026-06-23",
+      "group": "L",
+      "homeSourceName": "England",
+      "awaySourceName": "Ghana",
+      "city": "Foxborough",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-48",
+      "date": "2026-06-23",
+      "group": "L",
+      "homeSourceName": "Panama",
+      "awaySourceName": "Croatia",
+      "city": "Toronto",
+      "country": "Canada",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-49",
+      "date": "2026-06-24",
+      "group": "A",
+      "homeSourceName": "Mexico",
+      "awaySourceName": "Czech Republic",
+      "city": "Mexico City",
+      "country": "Mexico",
+      "neutral": false,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-50",
+      "date": "2026-06-24",
+      "group": "A",
+      "homeSourceName": "South Africa",
+      "awaySourceName": "South Korea",
+      "city": "Guadalupe",
+      "country": "Mexico",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-51",
+      "date": "2026-06-24",
+      "group": "B",
+      "homeSourceName": "Canada",
+      "awaySourceName": "Switzerland",
+      "city": "Vancouver",
+      "country": "Canada",
+      "neutral": false,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-52",
+      "date": "2026-06-24",
+      "group": "B",
+      "homeSourceName": "Bosnia and Herzegovina",
+      "awaySourceName": "Qatar",
+      "city": "Seattle",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-53",
+      "date": "2026-06-24",
+      "group": "C",
+      "homeSourceName": "Scotland",
+      "awaySourceName": "Brazil",
+      "city": "Miami Gardens",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-54",
+      "date": "2026-06-24",
+      "group": "C",
+      "homeSourceName": "Morocco",
+      "awaySourceName": "Haiti",
+      "city": "Atlanta",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-55",
+      "date": "2026-06-25",
+      "group": "D",
+      "homeSourceName": "United States",
+      "awaySourceName": "Turkey",
+      "city": "Inglewood",
+      "country": "United States",
+      "neutral": false,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-56",
+      "date": "2026-06-25",
+      "group": "D",
+      "homeSourceName": "Paraguay",
+      "awaySourceName": "Australia",
+      "city": "Santa Clara",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-57",
+      "date": "2026-06-25",
+      "group": "E",
+      "homeSourceName": "Curaçao",
+      "awaySourceName": "Ivory Coast",
+      "city": "Philadelphia",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-58",
+      "date": "2026-06-25",
+      "group": "E",
+      "homeSourceName": "Ecuador",
+      "awaySourceName": "Germany",
+      "city": "East Rutherford",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-59",
+      "date": "2026-06-25",
+      "group": "F",
+      "homeSourceName": "Japan",
+      "awaySourceName": "Sweden",
+      "city": "Arlington",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-60",
+      "date": "2026-06-25",
+      "group": "F",
+      "homeSourceName": "Tunisia",
+      "awaySourceName": "Netherlands",
+      "city": "Kansas City",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-61",
+      "date": "2026-06-26",
+      "group": "G",
+      "homeSourceName": "Egypt",
+      "awaySourceName": "Iran",
+      "city": "Seattle",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-62",
+      "date": "2026-06-26",
+      "group": "G",
+      "homeSourceName": "New Zealand",
+      "awaySourceName": "Belgium",
+      "city": "Vancouver",
+      "country": "Canada",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-63",
+      "date": "2026-06-26",
+      "group": "H",
+      "homeSourceName": "Cape Verde",
+      "awaySourceName": "Saudi Arabia",
+      "city": "Houston",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-64",
+      "date": "2026-06-26",
+      "group": "H",
+      "homeSourceName": "Uruguay",
+      "awaySourceName": "Spain",
+      "city": "Zapopan",
+      "country": "Mexico",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-65",
+      "date": "2026-06-26",
+      "group": "I",
+      "homeSourceName": "Norway",
+      "awaySourceName": "France",
+      "city": "Foxborough",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-66",
+      "date": "2026-06-26",
+      "group": "I",
+      "homeSourceName": "Senegal",
+      "awaySourceName": "Iraq",
+      "city": "Toronto",
+      "country": "Canada",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-67",
+      "date": "2026-06-27",
+      "group": "J",
+      "homeSourceName": "Algeria",
+      "awaySourceName": "Austria",
+      "city": "Kansas City",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-68",
+      "date": "2026-06-27",
+      "group": "J",
+      "homeSourceName": "Jordan",
+      "awaySourceName": "Argentina",
+      "city": "Arlington",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-69",
+      "date": "2026-06-27",
+      "group": "K",
+      "homeSourceName": "Colombia",
+      "awaySourceName": "Portugal",
+      "city": "Miami Gardens",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-70",
+      "date": "2026-06-27",
+      "group": "K",
+      "homeSourceName": "DR Congo",
+      "awaySourceName": "Uzbekistan",
+      "city": "Atlanta",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-71",
+      "date": "2026-06-27",
+      "group": "L",
+      "homeSourceName": "Panama",
+      "awaySourceName": "England",
+      "city": "East Rutherford",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    },
+    {
+      "id": "wc26-72",
+      "date": "2026-06-27",
+      "group": "L",
+      "homeSourceName": "Croatia",
+      "awaySourceName": "Ghana",
+      "city": "Philadelphia",
+      "country": "United States",
+      "neutral": true,
+      "kickoffStatus": "TBD"
+    }
+  ]
+}
