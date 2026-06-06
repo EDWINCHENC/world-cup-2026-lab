@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
+import { historyMetadata } from "@/lib/history";
 import { groups, matches, teamById, teams, type Match, type Team } from "@/lib/world-cup-data";
 import { predictMatch } from "@/lib/predictor";
 import { cn } from "@/lib/utils";
@@ -301,7 +302,7 @@ function PredictView({ initialHome, initialAway }: { initialHome: Team; initialA
               <div className="flex items-center justify-between rounded-xl border border-cyan-300/10 bg-black/25 p-3"><span className="text-sm">模型可信度</span><strong className="text-lg text-cyan-300"><CountUpNumber value={result.confidence} /> · 较高</strong></div>
             </CardContent>
           </Card>
-          <section><h2 className="mb-3 text-lg font-bold">决定结果的因素</h2><div className="flex flex-col gap-2">{result.factors.map((factor) => <div key={factor.label} className="flex items-center justify-between rounded-2xl border border-white/8 bg-card/50 p-4"><div><p className="font-semibold">{factor.label}</p><p className="text-xs text-muted-foreground">{factor.value}</p></div><Badge variant="outline" className={factor.impact === "home" ? "border-primary/30 text-primary" : "border-orange-400/30 text-orange-300"}>{factor.impact === "home" ? home.name : away.name}</Badge></div>)}</div></section>
+          <section><h2 className="mb-3 text-lg font-bold">决定结果的因素</h2><div className="flex flex-col gap-2">{result.factors.map((factor) => <div key={factor.label} className="flex items-center justify-between gap-3 rounded-2xl border border-white/8 bg-card/50 p-4"><div><p className="font-semibold">{factor.label}</p><p className="text-xs text-muted-foreground">{factor.value}</p></div><Badge variant="outline" className={factor.impact === "home" ? "shrink-0 border-primary/30 text-primary" : factor.impact === "away" ? "shrink-0 border-orange-400/30 text-orange-300" : "shrink-0 border-cyan-300/30 text-cyan-300"}>{factor.impact === "home" ? home.name : factor.impact === "away" ? away.name : "均衡"}</Badge></div>)}</div></section>
         </div>
       ) : null}
     </div>
@@ -329,7 +330,7 @@ export function WorldCupApp() {
         {view === "today" ? <TodayView onPredict={startPrediction} /> : null}
         {view === "groups" ? <GroupsView onSelect={selectFromGroup} /> : null}
         {view === "predict" ? <PredictView key={`${selected[0].id}-${selected[1].id}`} initialHome={selected[0]} initialAway={selected[1]} /> : null}
-        {view === "more" ? <div className="flex flex-col gap-5"><h1 className="text-3xl font-black">更多数据</h1><Card><CardContent className="p-5"><h2 className="font-bold">模型过去表现</h2><p className="mt-2 text-sm text-muted-foreground">回测、Brier Score 与数据来源将在下一阶段接入。</p></CardContent></Card></div> : null}
+        {view === "more" ? <div className="flex flex-col gap-5"><h1 className="text-3xl font-black">更多数据</h1><Card><CardContent className="p-5"><h2 className="font-bold">历史数据已接入</h2><p className="mt-2 text-sm text-muted-foreground">本地历史库包含 {historyMetadata.totalPlayedMatches.toLocaleString()} 场已完赛国家队比赛，数据截止 {historyMetadata.latestPlayedDate}。</p><div className="mt-4 flex flex-wrap gap-2"><Badge variant="outline">来源：martj42/international_results</Badge><Badge variant="outline">许可：CC0-1.0</Badge><Badge variant="outline">近期半衰期：{historyMetadata.recencyHalfLifeYears} 年</Badge></div></CardContent></Card><Card><CardContent className="p-5"><h2 className="font-bold">模型过去表现</h2><p className="mt-2 text-sm text-muted-foreground">时间切分回测与 Brier Score 将在下一阶段接入。</p></CardContent></Card></div> : null}
       </div>
       <nav className="fixed inset-x-0 bottom-0 z-20 mx-auto grid max-w-xl grid-cols-4 border-t border-white/8 bg-[#07111d]/95 px-2 pb-[max(.75rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur-xl">
         {([

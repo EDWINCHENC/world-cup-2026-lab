@@ -1,0 +1,4666 @@
+{
+  "metadata": {
+    "source": "martj42/international_results",
+    "sourceUrl": "https://github.com/martj42/international_results",
+    "license": "CC0-1.0",
+    "latestPlayedDate": "2026-06-05",
+    "totalPlayedMatches": 49339,
+    "recentMatchLimit": 20,
+    "recencyHalfLifeYears": 2.5
+  },
+  "teamFeatures": {
+    "arg": {
+      "id": "arg",
+      "sourceName": "Argentina",
+      "matchesAvailable": 1067,
+      "recentMatchesUsed": 20,
+      "lastMatchDate": "2026-03-31",
+      "formScore": 73,
+      "attackScore": 91,
+      "defenseScore": 86,
+      "recentRecord": {
+        "wins": 14,
+        "draws": 3,
+        "losses": 3
+      },
+      "recent": [
+        {
+          "date": "2026-03-31",
+          "opponent": "Zambia",
+          "goalsFor": 5,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-03-27",
+          "opponent": "Mauritania",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2025-11-14",
+          "opponent": "Angola",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2025-10-14",
+          "opponent": "Puerto Rico",
+          "goalsFor": 6,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2025-10-10",
+          "opponent": "Venezuela",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2025-09-09",
+          "opponent": "Ecuador",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-09-04",
+          "opponent": "Venezuela",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-06-10",
+          "opponent": "Colombia",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        }
+      ]
+    },
+    "aus": {
+      "id": "aus",
+      "sourceName": "Australia",
+      "matchesAvailable": 580,
+      "recentMatchesUsed": 20,
+      "lastMatchDate": "2026-05-30",
+      "formScore": 66,
+      "attackScore": 84,
+      "defenseScore": 80,
+      "recentRecord": {
+        "wins": 11,
+        "draws": 4,
+        "losses": 5
+      },
+      "recent": [
+        {
+          "date": "2026-05-30",
+          "opponent": "Mexico",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2026-03-31",
+          "opponent": "Curaçao",
+          "goalsFor": 5,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA Series",
+          "neutral": false
+        },
+        {
+          "date": "2026-03-27",
+          "opponent": "Cameroon",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA Series",
+          "neutral": false
+        },
+        {
+          "date": "2025-11-18",
+          "opponent": "Colombia",
+          "goalsFor": 0,
+          "goalsAgainst": 3,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2025-11-14",
+          "opponent": "Venezuela",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2025-10-14",
+          "opponent": "United States",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2025-10-10",
+          "opponent": "Canada",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2025-09-09",
+          "opponent": "New Zealand",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Soccer Ashes",
+          "neutral": false
+        }
+      ]
+    },
+    "bra": {
+      "id": "bra",
+      "sourceName": "Brazil",
+      "matchesAvailable": 1058,
+      "recentMatchesUsed": 20,
+      "lastMatchDate": "2026-05-31",
+      "formScore": 57,
+      "attackScore": 83,
+      "defenseScore": 74,
+      "recentRecord": {
+        "wins": 10,
+        "draws": 5,
+        "losses": 5
+      },
+      "recent": [
+        {
+          "date": "2026-05-31",
+          "opponent": "Panama",
+          "goalsFor": 6,
+          "goalsAgainst": 2,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-03-31",
+          "opponent": "Croatia",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2026-03-26",
+          "opponent": "France",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2025-11-18",
+          "opponent": "Tunisia",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2025-11-15",
+          "opponent": "Senegal",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2025-10-14",
+          "opponent": "Japan",
+          "goalsFor": 2,
+          "goalsAgainst": 3,
+          "result": "L",
+          "tournament": "Kirin Cup",
+          "neutral": false
+        },
+        {
+          "date": "2025-10-10",
+          "opponent": "South Korea",
+          "goalsFor": 5,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2025-09-09",
+          "opponent": "Bolivia",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        }
+      ]
+    },
+    "cro": {
+      "id": "cro",
+      "sourceName": "Croatia",
+      "matchesAvailable": 395,
+      "recentMatchesUsed": 20,
+      "lastMatchDate": "2026-06-02",
+      "formScore": 66,
+      "attackScore": 92,
+      "defenseScore": 74,
+      "recentRecord": {
+        "wins": 11,
+        "draws": 4,
+        "losses": 5
+      },
+      "recent": [
+        {
+          "date": "2026-06-02",
+          "opponent": "Belgium",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-03-31",
+          "opponent": "Brazil",
+          "goalsFor": 1,
+          "goalsAgainst": 3,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2026-03-26",
+          "opponent": "Colombia",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2025-11-17",
+          "opponent": "Montenegro",
+          "goalsFor": 3,
+          "goalsAgainst": 2,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-11-14",
+          "opponent": "Faroe Islands",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-10-12",
+          "opponent": "Gibraltar",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-10-09",
+          "opponent": "Czech Republic",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-09-08",
+          "opponent": "Montenegro",
+          "goalsFor": 4,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        }
+      ]
+    },
+    "fra": {
+      "id": "fra",
+      "sourceName": "France",
+      "matchesAvailable": 934,
+      "recentMatchesUsed": 20,
+      "lastMatchDate": "2026-06-04",
+      "formScore": 71,
+      "attackScore": 94,
+      "defenseScore": 70,
+      "recentRecord": {
+        "wins": 13,
+        "draws": 2,
+        "losses": 5
+      },
+      "recent": [
+        {
+          "date": "2026-06-04",
+          "opponent": "Ivory Coast",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-03-29",
+          "opponent": "Colombia",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2026-03-26",
+          "opponent": "Brazil",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2025-11-16",
+          "opponent": "Azerbaijan",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-11-13",
+          "opponent": "Ukraine",
+          "goalsFor": 4,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-10-13",
+          "opponent": "Iceland",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-10-10",
+          "opponent": "Azerbaijan",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-09-09",
+          "opponent": "Iceland",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        }
+      ]
+    },
+    "ger": {
+      "id": "ger",
+      "sourceName": "Germany",
+      "matchesAvailable": 1030,
+      "recentMatchesUsed": 20,
+      "lastMatchDate": "2026-05-31",
+      "formScore": 71,
+      "attackScore": 100,
+      "defenseScore": 73,
+      "recentRecord": {
+        "wins": 13,
+        "draws": 3,
+        "losses": 4
+      },
+      "recent": [
+        {
+          "date": "2026-05-31",
+          "opponent": "Finland",
+          "goalsFor": 4,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-03-30",
+          "opponent": "Ghana",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-03-27",
+          "opponent": "Switzerland",
+          "goalsFor": 4,
+          "goalsAgainst": 3,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2025-11-17",
+          "opponent": "Slovakia",
+          "goalsFor": 6,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-11-14",
+          "opponent": "Luxembourg",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-10-13",
+          "opponent": "Northern Ireland",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-10-10",
+          "opponent": "Luxembourg",
+          "goalsFor": 4,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-09-07",
+          "opponent": "Northern Ireland",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        }
+      ]
+    },
+    "jpn": {
+      "id": "jpn",
+      "sourceName": "Japan",
+      "matchesAvailable": 790,
+      "recentMatchesUsed": 20,
+      "lastMatchDate": "2026-05-31",
+      "formScore": 77,
+      "attackScore": 100,
+      "defenseScore": 88,
+      "recentRecord": {
+        "wins": 14,
+        "draws": 4,
+        "losses": 2
+      },
+      "recent": [
+        {
+          "date": "2026-05-31",
+          "opponent": "Iceland",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-03-31",
+          "opponent": "England",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-03-28",
+          "opponent": "Scotland",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2025-11-18",
+          "opponent": "Bolivia",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Kirin Cup",
+          "neutral": false
+        },
+        {
+          "date": "2025-11-14",
+          "opponent": "Ghana",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Kirin Cup",
+          "neutral": false
+        },
+        {
+          "date": "2025-10-14",
+          "opponent": "Brazil",
+          "goalsFor": 3,
+          "goalsAgainst": 2,
+          "result": "W",
+          "tournament": "Kirin Cup",
+          "neutral": false
+        },
+        {
+          "date": "2025-10-10",
+          "opponent": "Paraguay",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Kirin Cup",
+          "neutral": false
+        },
+        {
+          "date": "2025-09-09",
+          "opponent": "United States",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "kor": {
+      "id": "kor",
+      "sourceName": "South Korea",
+      "matchesAvailable": 1007,
+      "recentMatchesUsed": 20,
+      "lastMatchDate": "2026-06-03",
+      "formScore": 69,
+      "attackScore": 85,
+      "defenseScore": 76,
+      "recentRecord": {
+        "wins": 12,
+        "draws": 5,
+        "losses": 3
+      },
+      "recent": [
+        {
+          "date": "2026-06-03",
+          "opponent": "El Salvador",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2026-05-30",
+          "opponent": "Trinidad and Tobago",
+          "goalsFor": 5,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2026-03-31",
+          "opponent": "Austria",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-03-28",
+          "opponent": "Ivory Coast",
+          "goalsFor": 0,
+          "goalsAgainst": 4,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2025-11-18",
+          "opponent": "Ghana",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2025-11-14",
+          "opponent": "Bolivia",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2025-10-14",
+          "opponent": "Paraguay",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2025-10-10",
+          "opponent": "Brazil",
+          "goalsFor": 0,
+          "goalsAgainst": 5,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "mar": {
+      "id": "mar",
+      "sourceName": "Morocco",
+      "matchesAvailable": 616,
+      "recentMatchesUsed": 20,
+      "lastMatchDate": "2026-06-02",
+      "formScore": 86,
+      "attackScore": 88,
+      "defenseScore": 92,
+      "recentRecord": {
+        "wins": 16,
+        "draws": 4,
+        "losses": 0
+      },
+      "recent": [
+        {
+          "date": "2026-06-02",
+          "opponent": "Madagascar",
+          "goalsFor": 4,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-05-26",
+          "opponent": "Burundi",
+          "goalsFor": 5,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-03-31",
+          "opponent": "Paraguay",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2026-03-27",
+          "opponent": "Ecuador",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2026-01-18",
+          "opponent": "Senegal",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "African Cup of Nations",
+          "neutral": false
+        },
+        {
+          "date": "2026-01-14",
+          "opponent": "Nigeria",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "African Cup of Nations",
+          "neutral": false
+        },
+        {
+          "date": "2026-01-09",
+          "opponent": "Cameroon",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "African Cup of Nations",
+          "neutral": false
+        },
+        {
+          "date": "2026-01-04",
+          "opponent": "Tanzania",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "African Cup of Nations",
+          "neutral": false
+        }
+      ]
+    },
+    "mex": {
+      "id": "mex",
+      "sourceName": "Mexico",
+      "matchesAvailable": 1003,
+      "recentMatchesUsed": 20,
+      "lastMatchDate": "2026-06-04",
+      "formScore": 70,
+      "attackScore": 78,
+      "defenseScore": 82,
+      "recentRecord": {
+        "wins": 11,
+        "draws": 7,
+        "losses": 2
+      },
+      "recent": [
+        {
+          "date": "2026-06-04",
+          "opponent": "Serbia",
+          "goalsFor": 5,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-05-30",
+          "opponent": "Australia",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2026-05-22",
+          "opponent": "Ghana",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-03-31",
+          "opponent": "Belgium",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2026-03-28",
+          "opponent": "Portugal",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-02-25",
+          "opponent": "Iceland",
+          "goalsFor": 4,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-01-25",
+          "opponent": "Bolivia",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-01-22",
+          "opponent": "Panama",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "nga": {
+      "id": "nga",
+      "sourceName": "Nigeria",
+      "matchesAvailable": 660,
+      "recentMatchesUsed": 20,
+      "lastMatchDate": "2026-06-03",
+      "formScore": 76,
+      "attackScore": 91,
+      "defenseScore": 80,
+      "recentRecord": {
+        "wins": 12,
+        "draws": 8,
+        "losses": 0
+      },
+      "recent": [
+        {
+          "date": "2026-06-03",
+          "opponent": "Poland",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-05-30",
+          "opponent": "Jamaica",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Unity Cup",
+          "neutral": true
+        },
+        {
+          "date": "2026-05-26",
+          "opponent": "Zimbabwe",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Unity Cup",
+          "neutral": true
+        },
+        {
+          "date": "2026-03-31",
+          "opponent": "Jordan",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2026-03-27",
+          "opponent": "Iran",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2026-01-17",
+          "opponent": "Egypt",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "African Cup of Nations",
+          "neutral": true
+        },
+        {
+          "date": "2026-01-14",
+          "opponent": "Morocco",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "African Cup of Nations",
+          "neutral": false
+        },
+        {
+          "date": "2026-01-10",
+          "opponent": "Algeria",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "African Cup of Nations",
+          "neutral": true
+        }
+      ]
+    },
+    "sco": {
+      "id": "sco",
+      "sourceName": "Scotland",
+      "matchesAvailable": 850,
+      "recentMatchesUsed": 20,
+      "lastMatchDate": "2026-05-30",
+      "formScore": 52,
+      "attackScore": 79,
+      "defenseScore": 66,
+      "recentRecord": {
+        "wins": 9,
+        "draws": 2,
+        "losses": 9
+      },
+      "recent": [
+        {
+          "date": "2026-05-30",
+          "opponent": "Curaçao",
+          "goalsFor": 4,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2026-03-31",
+          "opponent": "Ivory Coast",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2026-03-28",
+          "opponent": "Japan",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2025-11-18",
+          "opponent": "Denmark",
+          "goalsFor": 4,
+          "goalsAgainst": 2,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-11-15",
+          "opponent": "Greece",
+          "goalsFor": 2,
+          "goalsAgainst": 3,
+          "result": "L",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-10-12",
+          "opponent": "Belarus",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-10-09",
+          "opponent": "Greece",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2025-09-08",
+          "opponent": "Belarus",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": true
+        }
+      ]
+    }
+  },
+  "headToHead": {
+    "arg__aus": {
+      "teamAId": "arg",
+      "teamBId": "aus",
+      "meetings": 9,
+      "effectiveSample": 0.8,
+      "weightedTeamAScore": 0.9999,
+      "lastMeetingDate": "2023-06-15",
+      "teamAWins": 7,
+      "draws": 1,
+      "teamBWins": 1,
+      "recent": [
+        {
+          "date": "2023-06-15",
+          "opponent": "Australia",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2022-12-03",
+          "opponent": "Australia",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2007-09-11",
+          "opponent": "Australia",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2005-06-18",
+          "opponent": "Australia",
+          "goalsFor": 4,
+          "goalsAgainst": 2,
+          "result": "W",
+          "tournament": "Confederations Cup",
+          "neutral": true
+        },
+        {
+          "date": "1995-06-30",
+          "opponent": "Australia",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1993-11-17",
+          "opponent": "Australia",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        }
+      ]
+    },
+    "arg__bra": {
+      "teamAId": "arg",
+      "teamBId": "bra",
+      "meetings": 110,
+      "effectiveSample": 2.9,
+      "weightedTeamAScore": 0.7675,
+      "lastMeetingDate": "2025-03-25",
+      "teamAWins": 41,
+      "draws": 26,
+      "teamBWins": 43,
+      "recent": [
+        {
+          "date": "2025-03-25",
+          "opponent": "Brazil",
+          "goalsFor": 4,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2023-11-21",
+          "opponent": "Brazil",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2021-11-16",
+          "opponent": "Brazil",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2021-07-10",
+          "opponent": "Brazil",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Copa América",
+          "neutral": false
+        },
+        {
+          "date": "2019-11-15",
+          "opponent": "Brazil",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Superclásico de las Américas",
+          "neutral": true
+        },
+        {
+          "date": "2019-07-02",
+          "opponent": "Brazil",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Copa América",
+          "neutral": false
+        }
+      ]
+    },
+    "arg__cro": {
+      "teamAId": "arg",
+      "teamBId": "cro",
+      "meetings": 6,
+      "effectiveSample": 0.69,
+      "weightedTeamAScore": 0.7819,
+      "lastMeetingDate": "2022-12-13",
+      "teamAWins": 3,
+      "draws": 1,
+      "teamBWins": 2,
+      "recent": [
+        {
+          "date": "2022-12-13",
+          "opponent": "Croatia",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2018-06-21",
+          "opponent": "Croatia",
+          "goalsFor": 0,
+          "goalsAgainst": 3,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2014-11-12",
+          "opponent": "Croatia",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2006-03-01",
+          "opponent": "Croatia",
+          "goalsFor": 2,
+          "goalsAgainst": 3,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "1998-06-26",
+          "opponent": "Croatia",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "1994-06-04",
+          "opponent": "Croatia",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "arg__fra": {
+      "teamAId": "arg",
+      "teamBId": "fra",
+      "meetings": 13,
+      "effectiveSample": 0.67,
+      "weightedTeamAScore": 0.3953,
+      "lastMeetingDate": "2022-12-18",
+      "teamAWins": 6,
+      "draws": 4,
+      "teamBWins": 3,
+      "recent": [
+        {
+          "date": "2022-12-18",
+          "opponent": "France",
+          "goalsFor": 3,
+          "goalsAgainst": 3,
+          "result": "D",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2018-06-30",
+          "opponent": "France",
+          "goalsFor": 3,
+          "goalsAgainst": 4,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2009-02-11",
+          "opponent": "France",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2007-02-07",
+          "opponent": "France",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1986-03-26",
+          "opponent": "France",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1978-06-06",
+          "opponent": "France",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": false
+        }
+      ]
+    },
+    "arg__ger": {
+      "teamAId": "arg",
+      "teamBId": "ger",
+      "meetings": 23,
+      "effectiveSample": 0.23,
+      "weightedTeamAScore": 0.4579,
+      "lastMeetingDate": "2019-10-09",
+      "teamAWins": 10,
+      "draws": 6,
+      "teamBWins": 7,
+      "recent": [
+        {
+          "date": "2019-10-09",
+          "opponent": "Germany",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2014-09-03",
+          "opponent": "Germany",
+          "goalsFor": 4,
+          "goalsAgainst": 2,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2014-07-13",
+          "opponent": "Germany",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2012-08-15",
+          "opponent": "Germany",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2010-07-03",
+          "opponent": "Germany",
+          "goalsFor": 0,
+          "goalsAgainst": 4,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2010-03-03",
+          "opponent": "Germany",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "arg__jpn": {
+      "teamAId": "arg",
+      "teamBId": "jpn",
+      "meetings": 7,
+      "effectiveSample": 0.01,
+      "weightedTeamAScore": 0.3724,
+      "lastMeetingDate": "2010-10-08",
+      "teamAWins": 6,
+      "draws": 0,
+      "teamBWins": 1,
+      "recent": [
+        {
+          "date": "2010-10-08",
+          "opponent": "Japan",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2004-08-18",
+          "opponent": "Japan",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2003-06-08",
+          "opponent": "Japan",
+          "goalsFor": 4,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Kirin Cup",
+          "neutral": false
+        },
+        {
+          "date": "2002-11-20",
+          "opponent": "Japan",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1998-06-14",
+          "opponent": "Japan",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "1995-01-08",
+          "opponent": "Japan",
+          "goalsFor": 5,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Confederations Cup",
+          "neutral": true
+        }
+      ]
+    },
+    "arg__kor": {
+      "teamAId": "arg",
+      "teamBId": "kor",
+      "meetings": 3,
+      "effectiveSample": 0.02,
+      "weightedTeamAScore": 1,
+      "lastMeetingDate": "2010-06-17",
+      "teamAWins": 3,
+      "draws": 0,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "2010-06-17",
+          "opponent": "South Korea",
+          "goalsFor": 4,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2003-06-11",
+          "opponent": "South Korea",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1986-06-02",
+          "opponent": "South Korea",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        }
+      ]
+    },
+    "arg__mar": {
+      "teamAId": "arg",
+      "teamBId": "mar",
+      "meetings": 3,
+      "effectiveSample": 0.09,
+      "weightedTeamAScore": 1,
+      "lastMeetingDate": "2019-03-26",
+      "teamAWins": 3,
+      "draws": 0,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "2019-03-26",
+          "opponent": "Morocco",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2004-04-28",
+          "opponent": "Morocco",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1994-04-20",
+          "opponent": "Morocco",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "arg__mex": {
+      "teamAId": "arg",
+      "teamBId": "mex",
+      "meetings": 32,
+      "effectiveSample": 0.84,
+      "weightedTeamAScore": 0.9744,
+      "lastMeetingDate": "2022-11-26",
+      "teamAWins": 16,
+      "draws": 12,
+      "teamBWins": 4,
+      "recent": [
+        {
+          "date": "2022-11-26",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2019-09-10",
+          "opponent": "Mexico",
+          "goalsFor": 4,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2018-11-20",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2018-11-16",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2015-09-08",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2010-06-27",
+          "opponent": "Mexico",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        }
+      ]
+    },
+    "arg__nga": {
+      "teamAId": "arg",
+      "teamBId": "nga",
+      "meetings": 9,
+      "effectiveSample": 0.3,
+      "weightedTeamAScore": 0.7625,
+      "lastMeetingDate": "2018-06-26",
+      "teamAWins": 6,
+      "draws": 1,
+      "teamBWins": 2,
+      "recent": [
+        {
+          "date": "2018-06-26",
+          "opponent": "Nigeria",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2017-11-14",
+          "opponent": "Nigeria",
+          "goalsFor": 2,
+          "goalsAgainst": 4,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2014-06-25",
+          "opponent": "Nigeria",
+          "goalsFor": 3,
+          "goalsAgainst": 2,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2011-09-06",
+          "opponent": "Nigeria",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2011-06-01",
+          "opponent": "Nigeria",
+          "goalsFor": 1,
+          "goalsAgainst": 4,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2010-06-12",
+          "opponent": "Nigeria",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        }
+      ]
+    },
+    "arg__sco": {
+      "teamAId": "arg",
+      "teamBId": "sco",
+      "meetings": 4,
+      "effectiveSample": 0.01,
+      "weightedTeamAScore": 0.9943,
+      "lastMeetingDate": "2008-11-19",
+      "teamAWins": 2,
+      "draws": 1,
+      "teamBWins": 1,
+      "recent": [
+        {
+          "date": "2008-11-19",
+          "opponent": "Scotland",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1990-03-28",
+          "opponent": "Scotland",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1979-06-02",
+          "opponent": "Scotland",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1977-06-18",
+          "opponent": "Scotland",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "aus__bra": {
+      "teamAId": "aus",
+      "teamBId": "bra",
+      "meetings": 8,
+      "effectiveSample": 0.08,
+      "weightedTeamAScore": 0.0146,
+      "lastMeetingDate": "2017-06-13",
+      "teamAWins": 1,
+      "draws": 1,
+      "teamBWins": 6,
+      "recent": [
+        {
+          "date": "2017-06-13",
+          "opponent": "Brazil",
+          "goalsFor": 0,
+          "goalsAgainst": 4,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2013-09-07",
+          "opponent": "Brazil",
+          "goalsFor": 0,
+          "goalsAgainst": 6,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2006-06-18",
+          "opponent": "Brazil",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2001-06-09",
+          "opponent": "Brazil",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Confederations Cup",
+          "neutral": true
+        },
+        {
+          "date": "1997-12-21",
+          "opponent": "Brazil",
+          "goalsFor": 0,
+          "goalsAgainst": 6,
+          "result": "L",
+          "tournament": "Confederations Cup",
+          "neutral": true
+        },
+        {
+          "date": "1997-12-14",
+          "opponent": "Brazil",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "Confederations Cup",
+          "neutral": true
+        }
+      ]
+    },
+    "aus__cro": {
+      "teamAId": "aus",
+      "teamBId": "cro",
+      "meetings": 6,
+      "effectiveSample": 0.03,
+      "weightedTeamAScore": 0.0963,
+      "lastMeetingDate": "2014-06-06",
+      "teamAWins": 2,
+      "draws": 2,
+      "teamBWins": 2,
+      "recent": [
+        {
+          "date": "2014-06-06",
+          "opponent": "Croatia",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2006-06-22",
+          "opponent": "Croatia",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "1998-06-06",
+          "opponent": "Croatia",
+          "goalsFor": 0,
+          "goalsAgainst": 7,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1992-07-12",
+          "opponent": "Croatia",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1992-07-08",
+          "opponent": "Croatia",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1992-07-05",
+          "opponent": "Croatia",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "aus__fra": {
+      "teamAId": "aus",
+      "teamBId": "fra",
+      "meetings": 6,
+      "effectiveSample": 0.68,
+      "weightedTeamAScore": 0.002,
+      "lastMeetingDate": "2022-11-22",
+      "teamAWins": 1,
+      "draws": 1,
+      "teamBWins": 4,
+      "recent": [
+        {
+          "date": "2022-11-22",
+          "opponent": "France",
+          "goalsFor": 1,
+          "goalsAgainst": 4,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2018-06-16",
+          "opponent": "France",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2013-10-11",
+          "opponent": "France",
+          "goalsFor": 0,
+          "goalsAgainst": 6,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2001-11-11",
+          "opponent": "France",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2001-06-01",
+          "opponent": "France",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Confederations Cup",
+          "neutral": true
+        },
+        {
+          "date": "1994-05-26",
+          "opponent": "France",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Kirin Cup",
+          "neutral": true
+        }
+      ]
+    },
+    "aus__ger": {
+      "teamAId": "aus",
+      "teamBId": "ger",
+      "meetings": 6,
+      "effectiveSample": 0.14,
+      "weightedTeamAScore": 0.1715,
+      "lastMeetingDate": "2017-06-19",
+      "teamAWins": 1,
+      "draws": 1,
+      "teamBWins": 4,
+      "recent": [
+        {
+          "date": "2017-06-19",
+          "opponent": "Germany",
+          "goalsFor": 2,
+          "goalsAgainst": 3,
+          "result": "L",
+          "tournament": "Confederations Cup",
+          "neutral": true
+        },
+        {
+          "date": "2015-03-25",
+          "opponent": "Germany",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2011-03-29",
+          "opponent": "Germany",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2010-06-13",
+          "opponent": "Germany",
+          "goalsFor": 0,
+          "goalsAgainst": 4,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2005-06-15",
+          "opponent": "Germany",
+          "goalsFor": 3,
+          "goalsAgainst": 4,
+          "result": "L",
+          "tournament": "Confederations Cup",
+          "neutral": false
+        },
+        {
+          "date": "1974-06-18",
+          "opponent": "Germany",
+          "goalsFor": 0,
+          "goalsAgainst": 3,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": false
+        }
+      ]
+    },
+    "aus__jpn": {
+      "teamAId": "aus",
+      "teamBId": "jpn",
+      "meetings": 28,
+      "effectiveSample": 2.73,
+      "weightedTeamAScore": 0.5081,
+      "lastMeetingDate": "2025-06-05",
+      "teamAWins": 7,
+      "draws": 10,
+      "teamBWins": 11,
+      "recent": [
+        {
+          "date": "2025-06-05",
+          "opponent": "Japan",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2024-10-15",
+          "opponent": "Japan",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2022-03-24",
+          "opponent": "Japan",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2021-10-12",
+          "opponent": "Japan",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2017-08-31",
+          "opponent": "Japan",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2016-10-11",
+          "opponent": "Japan",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        }
+      ]
+    },
+    "aus__kor": {
+      "teamAId": "aus",
+      "teamBId": "kor",
+      "meetings": 29,
+      "effectiveSample": 0.85,
+      "weightedTeamAScore": 0.1414,
+      "lastMeetingDate": "2024-02-02",
+      "teamAWins": 9,
+      "draws": 11,
+      "teamBWins": 9,
+      "recent": [
+        {
+          "date": "2024-02-02",
+          "opponent": "South Korea",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "AFC Asian Cup",
+          "neutral": true
+        },
+        {
+          "date": "2019-06-07",
+          "opponent": "South Korea",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2018-11-17",
+          "opponent": "South Korea",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2015-01-31",
+          "opponent": "South Korea",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "AFC Asian Cup",
+          "neutral": false
+        },
+        {
+          "date": "2015-01-17",
+          "opponent": "South Korea",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "AFC Asian Cup",
+          "neutral": false
+        },
+        {
+          "date": "2013-07-20",
+          "opponent": "South Korea",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "EAFF Championship",
+          "neutral": false
+        }
+      ]
+    },
+    "aus__mar": {
+      "teamAId": "aus",
+      "teamBId": "mar",
+      "meetings": 1,
+      "effectiveSample": 0,
+      "weightedTeamAScore": 1,
+      "lastMeetingDate": "1987-06-09",
+      "teamAWins": 1,
+      "draws": 0,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "1987-06-09",
+          "opponent": "Morocco",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Korea Cup",
+          "neutral": true
+        }
+      ]
+    },
+    "aus__mex": {
+      "teamAId": "aus",
+      "teamBId": "mex",
+      "meetings": 6,
+      "effectiveSample": 0.95,
+      "weightedTeamAScore": 0.1611,
+      "lastMeetingDate": "2026-05-30",
+      "teamAWins": 2,
+      "draws": 3,
+      "teamBWins": 1,
+      "recent": [
+        {
+          "date": "2026-05-30",
+          "opponent": "Mexico",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2023-09-09",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2001-05-30",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Confederations Cup",
+          "neutral": true
+        },
+        {
+          "date": "1997-12-12",
+          "opponent": "Mexico",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Confederations Cup",
+          "neutral": true
+        },
+        {
+          "date": "1980-08-26",
+          "opponent": "Mexico",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1980-08-24",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "aus__nga": {
+      "teamAId": "aus",
+      "teamBId": "nga",
+      "meetings": 1,
+      "effectiveSample": 0,
+      "weightedTeamAScore": 1,
+      "lastMeetingDate": "2007-11-17",
+      "teamAWins": 1,
+      "draws": 0,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "2007-11-17",
+          "opponent": "Nigeria",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        }
+      ]
+    },
+    "aus__sco": {
+      "teamAId": "aus",
+      "teamBId": "sco",
+      "meetings": 5,
+      "effectiveSample": 0.01,
+      "weightedTeamAScore": 0.0371,
+      "lastMeetingDate": "2012-08-15",
+      "teamAWins": 1,
+      "draws": 1,
+      "teamBWins": 3,
+      "recent": [
+        {
+          "date": "2012-08-15",
+          "opponent": "Scotland",
+          "goalsFor": 1,
+          "goalsAgainst": 3,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2000-11-15",
+          "opponent": "Scotland",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1996-03-27",
+          "opponent": "Scotland",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1985-12-04",
+          "opponent": "Scotland",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "1985-11-20",
+          "opponent": "Scotland",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        }
+      ]
+    },
+    "bra__cro": {
+      "teamAId": "bra",
+      "teamBId": "cro",
+      "meetings": 6,
+      "effectiveSample": 1.26,
+      "weightedTeamAScore": 0.7952,
+      "lastMeetingDate": "2026-03-31",
+      "teamAWins": 4,
+      "draws": 2,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "2026-03-31",
+          "opponent": "Croatia",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2022-12-09",
+          "opponent": "Croatia",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2018-06-03",
+          "opponent": "Croatia",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2014-06-12",
+          "opponent": "Croatia",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": false
+        },
+        {
+          "date": "2006-06-13",
+          "opponent": "Croatia",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2005-08-17",
+          "opponent": "Croatia",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "bra__fra": {
+      "teamAId": "bra",
+      "teamBId": "fra",
+      "meetings": 17,
+      "effectiveSample": 0.68,
+      "weightedTeamAScore": 0.0703,
+      "lastMeetingDate": "2026-03-26",
+      "teamAWins": 7,
+      "draws": 4,
+      "teamBWins": 6,
+      "recent": [
+        {
+          "date": "2026-03-26",
+          "opponent": "France",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2015-03-26",
+          "opponent": "France",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2013-06-09",
+          "opponent": "France",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2011-02-09",
+          "opponent": "France",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2006-07-01",
+          "opponent": "France",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2004-05-20",
+          "opponent": "France",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "bra__ger": {
+      "teamAId": "bra",
+      "teamBId": "ger",
+      "meetings": 23,
+      "effectiveSample": 0.13,
+      "weightedTeamAScore": 0.5456,
+      "lastMeetingDate": "2018-03-27",
+      "teamAWins": 13,
+      "draws": 5,
+      "teamBWins": 5,
+      "recent": [
+        {
+          "date": "2018-03-27",
+          "opponent": "Germany",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2014-07-08",
+          "opponent": "Germany",
+          "goalsFor": 1,
+          "goalsAgainst": 7,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": false
+        },
+        {
+          "date": "2011-08-10",
+          "opponent": "Germany",
+          "goalsFor": 2,
+          "goalsAgainst": 3,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2005-06-25",
+          "opponent": "Germany",
+          "goalsFor": 3,
+          "goalsAgainst": 2,
+          "result": "W",
+          "tournament": "Confederations Cup",
+          "neutral": false
+        },
+        {
+          "date": "2004-09-08",
+          "opponent": "Germany",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2002-06-30",
+          "opponent": "Germany",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        }
+      ]
+    },
+    "bra__jpn": {
+      "teamAId": "bra",
+      "teamBId": "jpn",
+      "meetings": 14,
+      "effectiveSample": 1.19,
+      "weightedTeamAScore": 0.295,
+      "lastMeetingDate": "2025-10-14",
+      "teamAWins": 11,
+      "draws": 2,
+      "teamBWins": 1,
+      "recent": [
+        {
+          "date": "2025-10-14",
+          "opponent": "Japan",
+          "goalsFor": 2,
+          "goalsAgainst": 3,
+          "result": "L",
+          "tournament": "Kirin Cup",
+          "neutral": false
+        },
+        {
+          "date": "2022-06-06",
+          "opponent": "Japan",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2017-11-10",
+          "opponent": "Japan",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2014-10-14",
+          "opponent": "Japan",
+          "goalsFor": 4,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2013-06-15",
+          "opponent": "Japan",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Confederations Cup",
+          "neutral": false
+        },
+        {
+          "date": "2012-10-16",
+          "opponent": "Japan",
+          "goalsFor": 4,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        }
+      ]
+    },
+    "bra__kor": {
+      "teamAId": "bra",
+      "teamBId": "kor",
+      "meetings": 9,
+      "effectiveSample": 1.4,
+      "weightedTeamAScore": 0.9998,
+      "lastMeetingDate": "2025-10-10",
+      "teamAWins": 8,
+      "draws": 0,
+      "teamBWins": 1,
+      "recent": [
+        {
+          "date": "2025-10-10",
+          "opponent": "South Korea",
+          "goalsFor": 5,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2022-12-05",
+          "opponent": "South Korea",
+          "goalsFor": 4,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2022-06-02",
+          "opponent": "South Korea",
+          "goalsFor": 5,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2019-11-19",
+          "opponent": "South Korea",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2013-10-12",
+          "opponent": "South Korea",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2002-11-20",
+          "opponent": "South Korea",
+          "goalsFor": 3,
+          "goalsAgainst": 2,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "bra__mar": {
+      "teamAId": "bra",
+      "teamBId": "mar",
+      "meetings": 3,
+      "effectiveSample": 0.27,
+      "weightedTeamAScore": 0.003,
+      "lastMeetingDate": "2023-03-25",
+      "teamAWins": 2,
+      "draws": 0,
+      "teamBWins": 1,
+      "recent": [
+        {
+          "date": "2023-03-25",
+          "opponent": "Morocco",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1998-06-16",
+          "opponent": "Morocco",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "1997-10-09",
+          "opponent": "Morocco",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "bra__mex": {
+      "teamAId": "bra",
+      "teamBId": "mex",
+      "meetings": 42,
+      "effectiveSample": 0.68,
+      "weightedTeamAScore": 0.9231,
+      "lastMeetingDate": "2024-06-08",
+      "teamAWins": 25,
+      "draws": 7,
+      "teamBWins": 10,
+      "recent": [
+        {
+          "date": "2024-06-08",
+          "opponent": "Mexico",
+          "goalsFor": 3,
+          "goalsAgainst": 2,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2018-07-02",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2015-06-07",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2014-06-17",
+          "opponent": "Mexico",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "FIFA World Cup",
+          "neutral": false
+        },
+        {
+          "date": "2013-06-19",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Confederations Cup",
+          "neutral": false
+        },
+        {
+          "date": "2012-06-03",
+          "opponent": "Mexico",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        }
+      ]
+    },
+    "bra__nga": {
+      "teamAId": "bra",
+      "teamBId": "nga",
+      "meetings": 2,
+      "effectiveSample": 0.1,
+      "weightedTeamAScore": 0.5053,
+      "lastMeetingDate": "2019-10-13",
+      "teamAWins": 1,
+      "draws": 1,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "2019-10-13",
+          "opponent": "Nigeria",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2003-06-11",
+          "opponent": "Nigeria",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "bra__sco": {
+      "teamAId": "bra",
+      "teamBId": "sco",
+      "meetings": 10,
+      "effectiveSample": 0.01,
+      "weightedTeamAScore": 1,
+      "lastMeetingDate": "2011-03-27",
+      "teamAWins": 8,
+      "draws": 2,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "2011-03-27",
+          "opponent": "Scotland",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "1998-06-10",
+          "opponent": "Scotland",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "1990-06-20",
+          "opponent": "Scotland",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "1987-05-26",
+          "opponent": "Scotland",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Rous Cup",
+          "neutral": false
+        },
+        {
+          "date": "1982-06-18",
+          "opponent": "Scotland",
+          "goalsFor": 4,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "1977-06-23",
+          "opponent": "Scotland",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "cro__fra": {
+      "teamAId": "cro",
+      "teamBId": "fra",
+      "meetings": 12,
+      "effectiveSample": 2.92,
+      "weightedTeamAScore": 0.4582,
+      "lastMeetingDate": "2025-03-23",
+      "teamAWins": 2,
+      "draws": 3,
+      "teamBWins": 7,
+      "recent": [
+        {
+          "date": "2025-03-23",
+          "opponent": "France",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "UEFA Nations League",
+          "neutral": false
+        },
+        {
+          "date": "2025-03-20",
+          "opponent": "France",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "UEFA Nations League",
+          "neutral": false
+        },
+        {
+          "date": "2022-06-13",
+          "opponent": "France",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "UEFA Nations League",
+          "neutral": false
+        },
+        {
+          "date": "2022-06-06",
+          "opponent": "France",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "UEFA Nations League",
+          "neutral": false
+        },
+        {
+          "date": "2020-10-14",
+          "opponent": "France",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "UEFA Nations League",
+          "neutral": false
+        },
+        {
+          "date": "2020-09-08",
+          "opponent": "France",
+          "goalsFor": 2,
+          "goalsAgainst": 4,
+          "result": "L",
+          "tournament": "UEFA Nations League",
+          "neutral": false
+        }
+      ]
+    },
+    "cro__ger": {
+      "teamAId": "cro",
+      "teamBId": "ger",
+      "meetings": 8,
+      "effectiveSample": 0.01,
+      "weightedTeamAScore": 0.8079,
+      "lastMeetingDate": "2008-06-12",
+      "teamAWins": 2,
+      "draws": 1,
+      "teamBWins": 5,
+      "recent": [
+        {
+          "date": "2008-06-12",
+          "opponent": "Germany",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "UEFA Euro",
+          "neutral": true
+        },
+        {
+          "date": "2004-02-18",
+          "opponent": "Germany",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2000-03-29",
+          "opponent": "Germany",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1998-07-04",
+          "opponent": "Germany",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "1996-06-23",
+          "opponent": "Germany",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "UEFA Euro",
+          "neutral": true
+        },
+        {
+          "date": "1942-11-01",
+          "opponent": "Germany",
+          "goalsFor": 1,
+          "goalsAgainst": 5,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "cro__jpn": {
+      "teamAId": "cro",
+      "teamBId": "jpn",
+      "meetings": 4,
+      "effectiveSample": 0.52,
+      "weightedTeamAScore": 0.5002,
+      "lastMeetingDate": "2022-12-05",
+      "teamAWins": 1,
+      "draws": 2,
+      "teamBWins": 1,
+      "recent": [
+        {
+          "date": "2022-12-05",
+          "opponent": "Japan",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2006-06-18",
+          "opponent": "Japan",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "1998-06-20",
+          "opponent": "Japan",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "1997-06-08",
+          "opponent": "Japan",
+          "goalsFor": 3,
+          "goalsAgainst": 4,
+          "result": "L",
+          "tournament": "Kirin Cup",
+          "neutral": false
+        }
+      ]
+    },
+    "cro__kor": {
+      "teamAId": "cro",
+      "teamBId": "kor",
+      "meetings": 7,
+      "effectiveSample": 0.04,
+      "weightedTeamAScore": 0.88,
+      "lastMeetingDate": "2013-09-10",
+      "teamAWins": 3,
+      "draws": 2,
+      "teamBWins": 2,
+      "recent": [
+        {
+          "date": "2013-09-10",
+          "opponent": "South Korea",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2013-02-06",
+          "opponent": "South Korea",
+          "goalsFor": 4,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2006-01-29",
+          "opponent": "South Korea",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Lunar New Year Cup",
+          "neutral": true
+        },
+        {
+          "date": "2001-11-13",
+          "opponent": "South Korea",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2001-11-10",
+          "opponent": "South Korea",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1999-06-19",
+          "opponent": "South Korea",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "Korea Cup",
+          "neutral": false
+        }
+      ]
+    },
+    "cro__mar": {
+      "teamAId": "cro",
+      "teamBId": "mar",
+      "meetings": 3,
+      "effectiveSample": 1.02,
+      "weightedTeamAScore": 0.7522,
+      "lastMeetingDate": "2022-12-17",
+      "teamAWins": 1,
+      "draws": 2,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "2022-12-17",
+          "opponent": "Morocco",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2022-11-23",
+          "opponent": "Morocco",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "1996-12-11",
+          "opponent": "Morocco",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "King Hassan II Tournament",
+          "neutral": false
+        }
+      ]
+    },
+    "cro__mex": {
+      "teamAId": "cro",
+      "teamBId": "mex",
+      "meetings": 6,
+      "effectiveSample": 0.17,
+      "weightedTeamAScore": 0.704,
+      "lastMeetingDate": "2018-03-27",
+      "teamAWins": 4,
+      "draws": 0,
+      "teamBWins": 2,
+      "recent": [
+        {
+          "date": "2018-03-27",
+          "opponent": "Mexico",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2017-05-28",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2014-06-23",
+          "opponent": "Mexico",
+          "goalsFor": 1,
+          "goalsAgainst": 3,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2002-06-03",
+          "opponent": "Mexico",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "1999-06-16",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Korea Cup",
+          "neutral": true
+        },
+        {
+          "date": "1992-10-22",
+          "opponent": "Mexico",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "cro__nga": {
+      "teamAId": "cro",
+      "teamBId": "nga",
+      "meetings": 1,
+      "effectiveSample": 0.15,
+      "weightedTeamAScore": 1,
+      "lastMeetingDate": "2018-06-16",
+      "teamAWins": 1,
+      "draws": 0,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "2018-06-16",
+          "opponent": "Nigeria",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        }
+      ]
+    },
+    "cro__sco": {
+      "teamAId": "cro",
+      "teamBId": "sco",
+      "meetings": 8,
+      "effectiveSample": 1.74,
+      "weightedTeamAScore": 0.5478,
+      "lastMeetingDate": "2024-11-15",
+      "teamAWins": 2,
+      "draws": 3,
+      "teamBWins": 3,
+      "recent": [
+        {
+          "date": "2024-11-15",
+          "opponent": "Scotland",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "UEFA Nations League",
+          "neutral": false
+        },
+        {
+          "date": "2024-10-12",
+          "opponent": "Scotland",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "UEFA Nations League",
+          "neutral": false
+        },
+        {
+          "date": "2021-06-22",
+          "opponent": "Scotland",
+          "goalsFor": 3,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "UEFA Euro",
+          "neutral": false
+        },
+        {
+          "date": "2013-10-15",
+          "opponent": "Scotland",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2013-06-07",
+          "opponent": "Scotland",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "FIFA World Cup qualification",
+          "neutral": false
+        },
+        {
+          "date": "2008-03-26",
+          "opponent": "Scotland",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "fra__ger": {
+      "teamAId": "fra",
+      "teamBId": "ger",
+      "meetings": 35,
+      "effectiveSample": 2.25,
+      "weightedTeamAScore": 0.6356,
+      "lastMeetingDate": "2025-06-08",
+      "teamAWins": 16,
+      "draws": 8,
+      "teamBWins": 11,
+      "recent": [
+        {
+          "date": "2025-06-08",
+          "opponent": "Germany",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "UEFA Nations League",
+          "neutral": false
+        },
+        {
+          "date": "2024-03-23",
+          "opponent": "Germany",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2023-09-12",
+          "opponent": "Germany",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2021-06-15",
+          "opponent": "Germany",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "UEFA Euro",
+          "neutral": false
+        },
+        {
+          "date": "2018-10-16",
+          "opponent": "Germany",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "UEFA Nations League",
+          "neutral": false
+        },
+        {
+          "date": "2018-09-06",
+          "opponent": "Germany",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "UEFA Nations League",
+          "neutral": false
+        }
+      ]
+    },
+    "fra__jpn": {
+      "teamAId": "fra",
+      "teamBId": "jpn",
+      "meetings": 6,
+      "effectiveSample": 0.02,
+      "weightedTeamAScore": 0.2009,
+      "lastMeetingDate": "2012-10-12",
+      "teamAWins": 4,
+      "draws": 1,
+      "teamBWins": 1,
+      "recent": [
+        {
+          "date": "2012-10-12",
+          "opponent": "Japan",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2003-06-20",
+          "opponent": "Japan",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Confederations Cup",
+          "neutral": false
+        },
+        {
+          "date": "2001-06-10",
+          "opponent": "Japan",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Confederations Cup",
+          "neutral": false
+        },
+        {
+          "date": "2001-03-24",
+          "opponent": "Japan",
+          "goalsFor": 5,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2000-06-04",
+          "opponent": "Japan",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "King Hassan II Tournament",
+          "neutral": true
+        },
+        {
+          "date": "1994-05-29",
+          "opponent": "Japan",
+          "goalsFor": 4,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Kirin Cup",
+          "neutral": false
+        }
+      ]
+    },
+    "fra__kor": {
+      "teamAId": "fra",
+      "teamBId": "kor",
+      "meetings": 3,
+      "effectiveSample": 0.01,
+      "weightedTeamAScore": 0.6265,
+      "lastMeetingDate": "2006-06-18",
+      "teamAWins": 2,
+      "draws": 1,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "2006-06-18",
+          "opponent": "South Korea",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2002-05-26",
+          "opponent": "South Korea",
+          "goalsFor": 3,
+          "goalsAgainst": 2,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2001-05-30",
+          "opponent": "South Korea",
+          "goalsFor": 5,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Confederations Cup",
+          "neutral": false
+        }
+      ]
+    },
+    "fra__mar": {
+      "teamAId": "fra",
+      "teamBId": "mar",
+      "meetings": 6,
+      "effectiveSample": 0.52,
+      "weightedTeamAScore": 0.9959,
+      "lastMeetingDate": "2022-12-14",
+      "teamAWins": 4,
+      "draws": 2,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "2022-12-14",
+          "opponent": "Morocco",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2007-11-16",
+          "opponent": "Morocco",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2000-06-06",
+          "opponent": "Morocco",
+          "goalsFor": 5,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "King Hassan II Tournament",
+          "neutral": false
+        },
+        {
+          "date": "1999-01-20",
+          "opponent": "Morocco",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1998-05-29",
+          "opponent": "Morocco",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "King Hassan II Tournament",
+          "neutral": false
+        },
+        {
+          "date": "1988-02-05",
+          "opponent": "Morocco",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Tournoi de France",
+          "neutral": true
+        }
+      ]
+    },
+    "fra__mex": {
+      "teamAId": "fra",
+      "teamBId": "mex",
+      "meetings": 7,
+      "effectiveSample": 0.02,
+      "weightedTeamAScore": 0.1852,
+      "lastMeetingDate": "2010-06-17",
+      "teamAWins": 5,
+      "draws": 1,
+      "teamBWins": 1,
+      "recent": [
+        {
+          "date": "2010-06-17",
+          "opponent": "Mexico",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2006-05-27",
+          "opponent": "Mexico",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2001-06-03",
+          "opponent": "Mexico",
+          "goalsFor": 4,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Confederations Cup",
+          "neutral": true
+        },
+        {
+          "date": "1996-08-31",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1966-07-13",
+          "opponent": "Mexico",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "1954-06-19",
+          "opponent": "Mexico",
+          "goalsFor": 3,
+          "goalsAgainst": 2,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        }
+      ]
+    },
+    "fra__nga": {
+      "teamAId": "fra",
+      "teamBId": "nga",
+      "meetings": 2,
+      "effectiveSample": 0.06,
+      "weightedTeamAScore": 0.8946,
+      "lastMeetingDate": "2014-06-30",
+      "teamAWins": 1,
+      "draws": 0,
+      "teamBWins": 1,
+      "recent": [
+        {
+          "date": "2014-06-30",
+          "opponent": "Nigeria",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2009-06-02",
+          "opponent": "Nigeria",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "fra__sco": {
+      "teamAId": "fra",
+      "teamBId": "sco",
+      "meetings": 17,
+      "effectiveSample": 0.37,
+      "weightedTeamAScore": 0.9729,
+      "lastMeetingDate": "2023-10-17",
+      "teamAWins": 9,
+      "draws": 0,
+      "teamBWins": 8,
+      "recent": [
+        {
+          "date": "2023-10-17",
+          "opponent": "Scotland",
+          "goalsFor": 4,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2016-06-04",
+          "opponent": "Scotland",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2007-09-12",
+          "opponent": "Scotland",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "UEFA Euro qualification",
+          "neutral": false
+        },
+        {
+          "date": "2006-10-07",
+          "opponent": "Scotland",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "UEFA Euro qualification",
+          "neutral": false
+        },
+        {
+          "date": "2002-03-27",
+          "opponent": "Scotland",
+          "goalsFor": 5,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2000-03-29",
+          "opponent": "Scotland",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "ger__jpn": {
+      "teamAId": "ger",
+      "teamBId": "jpn",
+      "meetings": 4,
+      "effectiveSample": 0.82,
+      "weightedTeamAScore": 0.0036,
+      "lastMeetingDate": "2023-09-09",
+      "teamAWins": 1,
+      "draws": 1,
+      "teamBWins": 2,
+      "recent": [
+        {
+          "date": "2023-09-09",
+          "opponent": "Japan",
+          "goalsFor": 1,
+          "goalsAgainst": 4,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2022-11-23",
+          "opponent": "Japan",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2006-05-30",
+          "opponent": "Japan",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2004-12-16",
+          "opponent": "Japan",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "ger__kor": {
+      "teamAId": "ger",
+      "teamBId": "kor",
+      "meetings": 4,
+      "effectiveSample": 0.15,
+      "weightedTeamAScore": 0.0128,
+      "lastMeetingDate": "2018-06-27",
+      "teamAWins": 2,
+      "draws": 0,
+      "teamBWins": 2,
+      "recent": [
+        {
+          "date": "2018-06-27",
+          "opponent": "South Korea",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2004-12-19",
+          "opponent": "South Korea",
+          "goalsFor": 1,
+          "goalsAgainst": 3,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2002-06-25",
+          "opponent": "South Korea",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": false
+        },
+        {
+          "date": "1994-06-27",
+          "opponent": "South Korea",
+          "goalsFor": 3,
+          "goalsAgainst": 2,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        }
+      ]
+    },
+    "ger__mar": {
+      "teamAId": "ger",
+      "teamBId": "mar",
+      "meetings": 4,
+      "effectiveSample": 0,
+      "weightedTeamAScore": 1,
+      "lastMeetingDate": "1986-06-17",
+      "teamAWins": 4,
+      "draws": 0,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "1986-06-17",
+          "opponent": "Morocco",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "1970-06-03",
+          "opponent": "Morocco",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "1967-02-22",
+          "opponent": "Morocco",
+          "goalsFor": 5,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1963-12-29",
+          "opponent": "Morocco",
+          "goalsFor": 4,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "ger__mex": {
+      "teamAId": "ger",
+      "teamBId": "mex",
+      "meetings": 13,
+      "effectiveSample": 0.55,
+      "weightedTeamAScore": 0.4448,
+      "lastMeetingDate": "2023-10-17",
+      "teamAWins": 5,
+      "draws": 6,
+      "teamBWins": 2,
+      "recent": [
+        {
+          "date": "2023-10-17",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2018-06-17",
+          "opponent": "Mexico",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2017-06-29",
+          "opponent": "Mexico",
+          "goalsFor": 4,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Confederations Cup",
+          "neutral": true
+        },
+        {
+          "date": "2005-06-29",
+          "opponent": "Mexico",
+          "goalsFor": 4,
+          "goalsAgainst": 3,
+          "result": "W",
+          "tournament": "Confederations Cup",
+          "neutral": false
+        },
+        {
+          "date": "1998-06-29",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "1993-12-22",
+          "opponent": "Mexico",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "ger__nga": {
+      "teamAId": "ger",
+      "teamBId": "nga",
+      "meetings": 1,
+      "effectiveSample": 0,
+      "weightedTeamAScore": 1,
+      "lastMeetingDate": "1998-04-22",
+      "teamAWins": 1,
+      "draws": 0,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "1998-04-22",
+          "opponent": "Nigeria",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "ger__sco": {
+      "teamAId": "ger",
+      "teamBId": "sco",
+      "meetings": 18,
+      "effectiveSample": 0.67,
+      "weightedTeamAScore": 0.9982,
+      "lastMeetingDate": "2024-06-14",
+      "teamAWins": 9,
+      "draws": 5,
+      "teamBWins": 4,
+      "recent": [
+        {
+          "date": "2024-06-14",
+          "opponent": "Scotland",
+          "goalsFor": 5,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "UEFA Euro",
+          "neutral": false
+        },
+        {
+          "date": "2015-09-07",
+          "opponent": "Scotland",
+          "goalsFor": 3,
+          "goalsAgainst": 2,
+          "result": "W",
+          "tournament": "UEFA Euro qualification",
+          "neutral": false
+        },
+        {
+          "date": "2014-09-07",
+          "opponent": "Scotland",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "UEFA Euro qualification",
+          "neutral": false
+        },
+        {
+          "date": "2003-09-10",
+          "opponent": "Scotland",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "UEFA Euro qualification",
+          "neutral": false
+        },
+        {
+          "date": "2003-06-07",
+          "opponent": "Scotland",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "UEFA Euro qualification",
+          "neutral": false
+        },
+        {
+          "date": "1999-04-28",
+          "opponent": "Scotland",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "jpn__kor": {
+      "teamAId": "jpn",
+      "teamBId": "kor",
+      "meetings": 73,
+      "effectiveSample": 0.91,
+      "weightedTeamAScore": 0.6411,
+      "lastMeetingDate": "2022-07-27",
+      "teamAWins": 14,
+      "draws": 21,
+      "teamBWins": 38,
+      "recent": [
+        {
+          "date": "2022-07-27",
+          "opponent": "South Korea",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "EAFF Championship",
+          "neutral": false
+        },
+        {
+          "date": "2021-03-25",
+          "opponent": "South Korea",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2019-12-18",
+          "opponent": "South Korea",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "EAFF Championship",
+          "neutral": false
+        },
+        {
+          "date": "2017-12-16",
+          "opponent": "South Korea",
+          "goalsFor": 1,
+          "goalsAgainst": 4,
+          "result": "L",
+          "tournament": "EAFF Championship",
+          "neutral": false
+        },
+        {
+          "date": "2015-08-05",
+          "opponent": "South Korea",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "EAFF Championship",
+          "neutral": true
+        },
+        {
+          "date": "2013-07-28",
+          "opponent": "South Korea",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "EAFF Championship",
+          "neutral": false
+        }
+      ]
+    },
+    "jpn__mar": {
+      "teamAId": "jpn",
+      "teamBId": "mar",
+      "meetings": 0,
+      "effectiveSample": 0,
+      "weightedTeamAScore": 0.5,
+      "lastMeetingDate": null,
+      "teamAWins": 0,
+      "draws": 0,
+      "teamBWins": 0,
+      "recent": []
+    },
+    "jpn__mex": {
+      "teamAId": "jpn",
+      "teamBId": "mex",
+      "meetings": 8,
+      "effectiveSample": 0.7,
+      "weightedTeamAScore": 0.378,
+      "lastMeetingDate": "2025-09-06",
+      "teamAWins": 1,
+      "draws": 1,
+      "teamBWins": 6,
+      "recent": [
+        {
+          "date": "2025-09-06",
+          "opponent": "Mexico",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2020-11-17",
+          "opponent": "Mexico",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2013-06-22",
+          "opponent": "Mexico",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Confederations Cup",
+          "neutral": true
+        },
+        {
+          "date": "2005-06-16",
+          "opponent": "Mexico",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Confederations Cup",
+          "neutral": true
+        },
+        {
+          "date": "2000-02-05",
+          "opponent": "Mexico",
+          "goalsFor": 0,
+          "goalsAgainst": 1,
+          "result": "L",
+          "tournament": "Lunar New Year Cup",
+          "neutral": true
+        },
+        {
+          "date": "1998-05-31",
+          "opponent": "Mexico",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        }
+      ]
+    },
+    "jpn__nga": {
+      "teamAId": "jpn",
+      "teamBId": "nga",
+      "meetings": 3,
+      "effectiveSample": 0,
+      "weightedTeamAScore": 0.7473,
+      "lastMeetingDate": "2003-08-20",
+      "teamAWins": 1,
+      "draws": 1,
+      "teamBWins": 1,
+      "recent": [
+        {
+          "date": "2003-08-20",
+          "opponent": "Nigeria",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2001-10-07",
+          "opponent": "Nigeria",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "1995-01-06",
+          "opponent": "Nigeria",
+          "goalsFor": 0,
+          "goalsAgainst": 3,
+          "result": "L",
+          "tournament": "Confederations Cup",
+          "neutral": true
+        }
+      ]
+    },
+    "jpn__sco": {
+      "teamAId": "jpn",
+      "teamBId": "sco",
+      "meetings": 4,
+      "effectiveSample": 0.63,
+      "weightedTeamAScore": 0.9968,
+      "lastMeetingDate": "2026-03-28",
+      "teamAWins": 2,
+      "draws": 2,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "2026-03-28",
+          "opponent": "Scotland",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2009-10-10",
+          "opponent": "Scotland",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2006-05-13",
+          "opponent": "Scotland",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "Kirin Cup",
+          "neutral": false
+        },
+        {
+          "date": "1995-05-21",
+          "opponent": "Scotland",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "Kirin Cup",
+          "neutral": false
+        }
+      ]
+    },
+    "kor__mar": {
+      "teamAId": "kor",
+      "teamBId": "mar",
+      "meetings": 4,
+      "effectiveSample": 0.06,
+      "weightedTeamAScore": 0.0094,
+      "lastMeetingDate": "2017-10-10",
+      "teamAWins": 0,
+      "draws": 3,
+      "teamBWins": 1,
+      "recent": [
+        {
+          "date": "2017-10-10",
+          "opponent": "Morocco",
+          "goalsFor": 1,
+          "goalsAgainst": 3,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2001-02-08",
+          "opponent": "Morocco",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "United Arab Emirates Friendship Tournament",
+          "neutral": true
+        },
+        {
+          "date": "1996-03-23",
+          "opponent": "Morocco",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "United Arab Emirates Friendship Tournament",
+          "neutral": true
+        },
+        {
+          "date": "1980-10-20",
+          "opponent": "Morocco",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "Merdeka Tournament",
+          "neutral": true
+        }
+      ]
+    },
+    "kor__mex": {
+      "teamAId": "kor",
+      "teamBId": "mex",
+      "meetings": 14,
+      "effectiveSample": 0.85,
+      "weightedTeamAScore": 0.3185,
+      "lastMeetingDate": "2025-09-09",
+      "teamAWins": 3,
+      "draws": 3,
+      "teamBWins": 8,
+      "recent": [
+        {
+          "date": "2025-09-09",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2020-11-14",
+          "opponent": "Mexico",
+          "goalsFor": 2,
+          "goalsAgainst": 3,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2018-06-23",
+          "opponent": "Mexico",
+          "goalsFor": 1,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2014-01-29",
+          "opponent": "Mexico",
+          "goalsFor": 0,
+          "goalsAgainst": 4,
+          "result": "L",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2006-02-15",
+          "opponent": "Mexico",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2002-01-27",
+          "opponent": "Mexico",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "Gold Cup",
+          "neutral": true
+        }
+      ]
+    },
+    "kor__nga": {
+      "teamAId": "kor",
+      "teamBId": "nga",
+      "meetings": 5,
+      "effectiveSample": 0.03,
+      "weightedTeamAScore": 0.6712,
+      "lastMeetingDate": "2010-08-11",
+      "teamAWins": 3,
+      "draws": 2,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "2010-08-11",
+          "opponent": "Nigeria",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2010-06-22",
+          "opponent": "Nigeria",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        },
+        {
+          "date": "2001-09-16",
+          "opponent": "Nigeria",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "2001-09-13",
+          "opponent": "Nigeria",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1983-06-08",
+          "opponent": "Nigeria",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Korea Cup",
+          "neutral": false
+        }
+      ]
+    },
+    "kor__sco": {
+      "teamAId": "kor",
+      "teamBId": "sco",
+      "meetings": 1,
+      "effectiveSample": 0,
+      "weightedTeamAScore": 1,
+      "lastMeetingDate": "2002-05-16",
+      "teamAWins": 1,
+      "draws": 0,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "2002-05-16",
+          "opponent": "Scotland",
+          "goalsFor": 4,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "mar__mex": {
+      "teamAId": "mar",
+      "teamBId": "mex",
+      "meetings": 0,
+      "effectiveSample": 0,
+      "weightedTeamAScore": 0.5,
+      "lastMeetingDate": null,
+      "teamAWins": 0,
+      "draws": 0,
+      "teamBWins": 0,
+      "recent": []
+    },
+    "mar__nga": {
+      "teamAId": "mar",
+      "teamBId": "nga",
+      "meetings": 12,
+      "effectiveSample": 0.9,
+      "weightedTeamAScore": 0.5009,
+      "lastMeetingDate": "2026-01-14",
+      "teamAWins": 5,
+      "draws": 3,
+      "teamBWins": 4,
+      "recent": [
+        {
+          "date": "2026-01-14",
+          "opponent": "Nigeria",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "African Cup of Nations",
+          "neutral": false
+        },
+        {
+          "date": "2004-01-27",
+          "opponent": "Nigeria",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "African Cup of Nations",
+          "neutral": true
+        },
+        {
+          "date": "2000-02-03",
+          "opponent": "Nigeria",
+          "goalsFor": 0,
+          "goalsAgainst": 2,
+          "result": "L",
+          "tournament": "African Cup of Nations",
+          "neutral": false
+        },
+        {
+          "date": "1996-12-12",
+          "opponent": "Nigeria",
+          "goalsFor": 2,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "King Hassan II Tournament",
+          "neutral": false
+        },
+        {
+          "date": "1983-08-28",
+          "opponent": "Nigeria",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "African Cup of Nations qualification",
+          "neutral": false
+        },
+        {
+          "date": "1983-08-14",
+          "opponent": "Nigeria",
+          "goalsFor": 0,
+          "goalsAgainst": 0,
+          "result": "D",
+          "tournament": "African Cup of Nations qualification",
+          "neutral": false
+        }
+      ]
+    },
+    "mar__sco": {
+      "teamAId": "mar",
+      "teamBId": "sco",
+      "meetings": 1,
+      "effectiveSample": 0,
+      "weightedTeamAScore": 1,
+      "lastMeetingDate": "1998-06-23",
+      "teamAWins": 1,
+      "draws": 0,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "1998-06-23",
+          "opponent": "Scotland",
+          "goalsFor": 3,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "FIFA World Cup",
+          "neutral": true
+        }
+      ]
+    },
+    "mex__nga": {
+      "teamAId": "mex",
+      "teamBId": "nga",
+      "meetings": 6,
+      "effectiveSample": 0.4,
+      "weightedTeamAScore": 0.9732,
+      "lastMeetingDate": "2022-05-28",
+      "teamAWins": 3,
+      "draws": 3,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "2022-05-28",
+          "opponent": "Nigeria",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2021-07-03",
+          "opponent": "Nigeria",
+          "goalsFor": 4,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2013-05-31",
+          "opponent": "Nigeria",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2007-10-14",
+          "opponent": "Nigeria",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": false
+        },
+        {
+          "date": "1995-06-24",
+          "opponent": "Nigeria",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "USA Cup",
+          "neutral": true
+        },
+        {
+          "date": "1995-01-13",
+          "opponent": "Nigeria",
+          "goalsFor": 1,
+          "goalsAgainst": 1,
+          "result": "D",
+          "tournament": "Confederations Cup",
+          "neutral": true
+        }
+      ]
+    },
+    "mex__sco": {
+      "teamAId": "mex",
+      "teamBId": "sco",
+      "meetings": 1,
+      "effectiveSample": 0.07,
+      "weightedTeamAScore": 1,
+      "lastMeetingDate": "2018-06-02",
+      "teamAWins": 1,
+      "draws": 0,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "2018-06-02",
+          "opponent": "Scotland",
+          "goalsFor": 1,
+          "goalsAgainst": 0,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    },
+    "nga__sco": {
+      "teamAId": "nga",
+      "teamBId": "sco",
+      "meetings": 2,
+      "effectiveSample": 0.02,
+      "weightedTeamAScore": 0.5168,
+      "lastMeetingDate": "2014-05-28",
+      "teamAWins": 1,
+      "draws": 1,
+      "teamBWins": 0,
+      "recent": [
+        {
+          "date": "2014-05-28",
+          "opponent": "Scotland",
+          "goalsFor": 2,
+          "goalsAgainst": 2,
+          "result": "D",
+          "tournament": "Friendly",
+          "neutral": true
+        },
+        {
+          "date": "2002-04-17",
+          "opponent": "Scotland",
+          "goalsFor": 2,
+          "goalsAgainst": 1,
+          "result": "W",
+          "tournament": "Friendly",
+          "neutral": false
+        }
+      ]
+    }
+  }
+}
