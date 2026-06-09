@@ -4,19 +4,20 @@ import { useEffect, useMemo, useState } from "react";
 import {
   Activity,
   BarChart3,
+  Bot,
   BrainCircuit,
   CalendarDays,
   Check,
-  ChevronRight,
   CircleGauge,
   Database,
+  Eye,
   Flame,
   Info,
   LoaderCircle,
-  Radar,
   ShieldCheck,
   Sparkles,
   Users,
+  X,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -26,6 +27,7 @@ import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } f
 import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
 import { getTeamHistory, historyMetadata } from "@/lib/history";
+import { darkHorseRanking, predictScore, type ScorePrediction } from "@/lib/insights";
 import { availableMatchDates, groups, matches, scheduleMetadata, teamById, teams, type Match, type Team } from "@/lib/world-cup-data";
 import { defaultModelWeights, predictMatch, type ModelWeights, type Prediction } from "@/lib/predictor";
 import { cn } from "@/lib/utils";
@@ -92,7 +94,55 @@ function ProbabilityBar({ home, draw, away }: { home: number; draw: number; away
   );
 }
 
-function FeaturedMatch({ match, onPredict }: { match: Match; onPredict: (home: Team, away: Team) => void }) {
+function ScoreScenarioGrid({ prediction }: { prediction: ScorePrediction }) {
+  return (
+    <div className="grid grid-cols-3 gap-2">
+      {prediction.scenarios.map((scenario) => (
+        <div key={scenario.outcome} className={cn("relative rounded-2xl border p-3 text-center", scenario.recommended ? "border-primary/45 bg-primary/10" : "border-white/8 bg-white/[.03]")}>
+          {scenario.recommended ? <span className="absolute -top-2 left-1/2 -translate-x-1/2 rounded-full bg-primary px-2 py-0.5 text-[9px] font-black text-primary-foreground">首选</span> : null}
+          <p className="text-[10px] text-muted-foreground">{scenario.label}</p>
+          <strong className={cn("mt-1 block font-mono text-2xl", scenario.recommended ? "text-primary" : "text-foreground")}>{scenario.homeGoals}:{scenario.awayGoals}</strong>
+          <p className="mt-1 text-[10px] text-muted-foreground">单一比分 {scenario.probability}%</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ScoreGuessDrawer({ match, onClose, onPredict }: { match: Match | null; onClose: () => void; onPredict: (home: Team, away: Team) => void }) {
+  const home = match ? teamById.get(match.homeId)! : null;
+  const away = match ? teamById.get(match.awayId)! : null;
+  const score = home && away ? predictScore(home, away) : null;
+
+  return (
+    <Drawer open={match !== null} onOpenChange={(open) => { if (!open) onClose(); }}>
+      <DrawerContent className="border-white/10 bg-popover/98">
+        <DrawerHeader className="text-left">
+          <DrawerTitle className="flex items-center gap-2 text-xl font-black"><Bot className="text-primary" /> AI 猜比分</DrawerTitle>
+          <DrawerDescription>{home?.name} vs {away?.name} · {match ? formatMatchDate(match.date) : ""}</DrawerDescription>
+        </DrawerHeader>
+        {home && away && score ? (
+          <div className="overflow-y-auto px-4 pb-8">
+            <div className="score-oracle mb-4 rounded-3xl border border-primary/20 bg-primary/5 p-5 text-center">
+              <p className="text-xs text-muted-foreground">模型最推荐</p>
+              <div className="mt-2 flex items-center justify-center gap-4">
+                <span className="text-3xl">{home.flag}</span>
+                <strong className="font-mono text-6xl text-primary">{score.recommended.homeGoals}:{score.recommended.awayGoals}</strong>
+                <span className="text-3xl">{away.flag}</span>
+              </div>
+              <p className="mt-2 text-sm font-bold">{score.recommended.label} · 预期进球 {score.expectedHomeGoals} / {score.expectedAwayGoals}</p>
+            </div>
+            <ScoreScenarioGrid prediction={score} />
+            <p className="mt-4 text-xs leading-6 text-muted-foreground">基于 Elo、近期攻防评分推导双方预期进球，再使用 Poisson 分布计算具体比分。单一比分天然概率较低，建议结合胜平负概率判断。</p>
+            <Button className="mt-4 w-full" onClick={() => onPredict(home, away)}><BarChart3 data-icon="inline-start" /> 查看完整预测</Button>
+          </div>
+        ) : null}
+      </DrawerContent>
+    </Drawer>
+  );
+}
+
+function FeaturedMatch({ match, onPredict, onScore }: { match: Match; onPredict: (home: Team, away: Team) => void; onScore: (match: Match) => void }) {
   const home = teamById.get(match.homeId)!;
   const away = teamById.get(match.awayId)!;
   const result = predictMatch(home, away);
@@ -122,27 +172,25 @@ function FeaturedMatch({ match, onPredict }: { match: Match; onPredict: (home: T
           </div>
           <ProbabilityBar home={result.home} draw={result.draw} away={result.away} />
         </div>
-        <div className="grid grid-cols-[1fr_auto] items-center gap-4 rounded-2xl border border-cyan-400/10 bg-cyan-400/5 p-4">
-          <div>
-            <div className="flex items-center gap-2 text-sm font-semibold"><ShieldCheck className="text-cyan-300" /> 模型可信度</div>
-            <div className="mt-2 flex items-end gap-2"><strong className="text-3xl text-cyan-300">{result.confidence}%</strong><span className="pb-1 text-xs text-muted-foreground">历史特征与模型综合评估</span></div>
-          </div>
-          <CircleGauge className="size-12 text-cyan-300" strokeWidth={1.4} />
+        <div className="flex items-center justify-between rounded-2xl border border-cyan-400/10 bg-cyan-400/5 px-4 py-3">
+          <span className="flex items-center gap-2 text-xs font-semibold"><ShieldCheck className="size-4 text-cyan-300" /> 模型可信度</span>
+          <strong className="text-cyan-300">{result.confidence}% · {confidenceLabel(result.confidence)}</strong>
         </div>
-        <Button size="lg" className="h-14 text-base font-bold shadow-[0_0_30px_rgba(190,255,0,.18)]" onClick={() => onPredict(home, away)}>
-          <Sparkles data-icon="inline-start" /> 开始预测
-        </Button>
+        <div className="grid grid-cols-2 gap-2">
+          <Button className="h-12 font-bold shadow-[0_0_24px_rgba(190,255,0,.12)]" onClick={() => onPredict(home, away)}><BarChart3 data-icon="inline-start" /> 胜率/比分预测</Button>
+          <Button variant="outline" className="h-12 border-cyan-300/25 font-bold text-cyan-200" onClick={() => onScore(match)}><Bot data-icon="inline-start" /> AI 猜比分</Button>
+        </div>
       </CardContent>
     </Card>
   );
 }
 
-function MatchRow({ match, onPredict }: { match: Match; onPredict: (home: Team, away: Team) => void }) {
+function MatchRow({ match, onPredict, onScore }: { match: Match; onPredict: (home: Team, away: Team) => void; onScore: (match: Match) => void }) {
   const home = teamById.get(match.homeId)!;
   const away = teamById.get(match.awayId)!;
   const result = predictMatch(home, away);
   return (
-    <button onClick={() => onPredict(home, away)} className="group grid w-full grid-cols-[56px_1fr_auto] items-center gap-3 rounded-2xl border border-white/8 bg-card/55 p-3 text-left transition hover:border-primary/40 hover:bg-card">
+    <div className="grid w-full grid-cols-[56px_1fr_auto] items-center gap-3 rounded-2xl border border-white/8 bg-card/55 p-3 text-left transition hover:border-primary/40 hover:bg-card">
       <div>
         <p className="text-xs font-bold">时间待定</p>
         <p className="text-xs text-muted-foreground">{match.group}组</p>
@@ -153,64 +201,147 @@ function MatchRow({ match, onPredict }: { match: Match; onPredict: (home: Team, 
         </div>
         <ProbabilityBar home={result.home} draw={result.draw} away={result.away} />
       </div>
-      <div className="flex items-center gap-1 text-right">
-        <div><strong className="text-primary">{Math.max(result.home, result.away)}%</strong><p className="text-[10px] text-orange-400">爆冷 {result.upsetRisk}%</p></div>
-        <ChevronRight className="text-muted-foreground transition group-hover:translate-x-0.5 group-hover:text-primary" />
+      <div className="flex flex-col gap-1">
+        <Button size="sm" className="h-7 px-2 text-[10px]" onClick={() => onPredict(home, away)}>胜率</Button>
+        <Button size="sm" variant="outline" className="h-7 px-2 text-[10px] text-cyan-200" onClick={() => onScore(match)}>比分</Button>
       </div>
-    </button>
+    </div>
   );
 }
 
 function TodayView({ onPredict }: { onPredict: (home: Team, away: Team) => void }) {
   const [selectedDate, setSelectedDate] = useState(availableMatchDates[0]);
+  const [scoreMatch, setScoreMatch] = useState<Match | null>(null);
   const selectedMatches = matches.filter((match) => match.date === selectedDate);
 
   return (
-    <div className="flex flex-col gap-7">
+    <div className="flex flex-col gap-5">
       <header className="flex items-start justify-between">
         <div><h1 className="text-xl font-black tracking-tight">世界杯预测实验室</h1><p className="mt-1 text-xs text-muted-foreground"><span className="mr-1 text-primary">●</span> 已接入 {scheduleMetadata.matchCount} 场确定小组赛</p></div>
         <Button variant="outline" size="icon" className="rounded-full border-white/10 bg-white/5"><Info /></Button>
       </header>
-      <section className="flex flex-col gap-3"><h2 className="max-w-xs text-4xl font-black leading-tight tracking-tight">今天该看哪场？<span className="text-primary">↗</span></h2><p className="text-sm text-muted-foreground">今天暂无世界杯比赛，已为你定位到首个确定比赛日。</p><label className="flex items-center justify-between rounded-2xl border border-white/10 bg-card/60 p-3 text-sm"><span className="font-semibold">手动选择日期</span><select aria-label="选择比赛日期" value={selectedDate} onChange={(event) => setSelectedDate(event.target.value)} className="rounded-xl border border-white/10 bg-background px-3 py-2 text-sm">{availableMatchDates.map((date) => <option key={date} value={date}>{formatMatchDate(date)}</option>)}</select></label></section>
-      <div className="flex gap-2 overflow-x-auto pb-1">
-        <Badge className="h-9 shrink-0 px-4"><Radar data-icon="inline-start" /> 今日最值得看</Badge>
-        <Badge variant="outline" className="h-9 shrink-0 border-orange-400/30 px-4 text-orange-300"><Flame data-icon="inline-start" /> 最大爆冷可能</Badge>
-        <Badge variant="outline" className="h-9 shrink-0 border-white/10 px-4"><ShieldCheck data-icon="inline-start" /> 强队稳胆</Badge>
-      </div>
-      <div className="flex items-center justify-between text-xs text-muted-foreground"><span>{formatMatchDate(selectedDate)}精选</span><span>左右滑动查看 {selectedMatches.length} 场 →</span></div>
+      <section><h2 className="text-3xl font-black leading-tight tracking-tight">今天该看哪场？<span className="text-primary"> ↗</span></h2></section>
+      <div className="flex items-center justify-between gap-3 text-xs text-muted-foreground"><span>{formatMatchDate(selectedDate)}精选 · {selectedMatches.length} 场</span><select aria-label="选择比赛日期" value={selectedDate} onChange={(event) => setSelectedDate(event.target.value)} className="max-w-36 rounded-full border border-white/10 bg-card/75 px-3 py-2 text-xs font-semibold text-foreground">{availableMatchDates.map((date) => <option key={date} value={date}>{formatMatchDate(date)}</option>)}</select></div>
       <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2">
-        {selectedMatches.map((match) => <div key={match.id} className="w-[calc(100vw-2rem)] max-w-xl shrink-0 snap-center"><FeaturedMatch match={match} onPredict={onPredict} /></div>)}
+        {selectedMatches.map((match) => <div key={match.id} className="w-[calc(100vw-2rem)] max-w-xl shrink-0 snap-center"><FeaturedMatch match={match} onPredict={onPredict} onScore={setScoreMatch} /></div>)}
       </div>
       <section className="flex flex-col gap-3">
         <div className="flex items-end justify-between"><div><h2 className="text-xl font-bold">{formatMatchDate(selectedDate)}比赛</h2><p className="text-xs text-muted-foreground">开球时间尚未从可靠来源确认</p></div><span className="text-sm text-muted-foreground">共 {selectedMatches.length} 场</span></div>
-        {selectedMatches.map((match) => <MatchRow key={match.id} match={match} onPredict={onPredict} />)}
+        {selectedMatches.map((match) => <MatchRow key={match.id} match={match} onPredict={onPredict} onScore={setScoreMatch} />)}
       </section>
+      <ScoreGuessDrawer match={scoreMatch} onClose={() => setScoreMatch(null)} onPredict={onPredict} />
     </div>
   );
 }
 
-function GroupsView({ selectedTeam, onSelect, onClear }: { selectedTeam: Team | null; onSelect: (team: Team) => void; onClear: () => void }) {
+function GroupsView({ selectedTeam, onSelect, onPredict, onClear }: { selectedTeam: Team | null; onSelect: (team: Team) => void; onPredict: (home: Team, away: Team) => void; onClear: () => void }) {
   const [activeGroup, setActiveGroup] = useState("C");
+  const [featuredType, setFeaturedType] = useState<"strongest" | "upset">("strongest");
   const group = groups.find((item) => item.name === activeGroup)!;
+  const rankedTeams = group.teams.toSorted((a, b) => b.elo - a.elo);
+  const groupMatches = matches.filter((match) => match.group === activeGroup);
+  const strongestMatch = groupMatches.toSorted((a, b) => {
+    const aStrength = teamById.get(a.homeId)!.elo + teamById.get(a.awayId)!.elo;
+    const bStrength = teamById.get(b.homeId)!.elo + teamById.get(b.awayId)!.elo;
+    return bStrength - aStrength;
+  })[0];
+  const upsetMatch = groupMatches.toSorted((a, b) => {
+    const aTeams = [teamById.get(a.homeId)!, teamById.get(a.awayId)!];
+    const bTeams = [teamById.get(b.homeId)!, teamById.get(b.awayId)!];
+    return predictMatch(bTeams[0], bTeams[1]).upsetRisk - predictMatch(aTeams[0], aTeams[1]).upsetRisk;
+  })[0];
+  const featuredMatch = featuredType === "strongest" ? strongestMatch : upsetMatch;
+  const featuredHome = teamById.get(featuredMatch.homeId)!;
+  const featuredAway = teamById.get(featuredMatch.awayId)!;
+  const featuredPrediction = predictMatch(featuredHome, featuredAway);
+  const groupDarkHorse = darkHorseRanking.find((candidate) => candidate.team.group === activeGroup);
+
   return (
     <div className="flex flex-col gap-6">
-      <header><h1 className="text-3xl font-black">小组强度</h1><p className="mt-2 text-sm text-muted-foreground">{selectedTeam ? `已选择 ${selectedTeam.name}，再选择一支球队开始预测。` : "先选择一支球队，再选择它的预测对手。"}</p>{selectedTeam ? <Button variant="outline" size="sm" className="mt-3" onClick={onClear}>清除已选球队</Button> : null}</header>
+      <header><div className="flex items-center gap-2"><h1 className="text-3xl font-black">小组 / 黑马</h1><Badge variant="outline" className="border-orange-400/25 text-orange-300"><Flame data-icon="inline-start" /> 黑马雷达</Badge></div><p className="mt-2 text-sm text-muted-foreground">{selectedTeam ? `已选择 ${selectedTeam.name}，再选择一支球队开始预测。` : "查看组内实力排序，点击两支球队即可预测。"}</p>{selectedTeam ? <Button variant="outline" size="sm" className="mt-3" onClick={onClear}>清除已选球队</Button> : null}</header>
       <div className="flex gap-2 overflow-x-auto pb-1">
-        {groups.map((item) => <Button key={item.name} variant={activeGroup === item.name ? "default" : "outline"} size="sm" onClick={() => setActiveGroup(item.name)}>Group {item.name}</Button>)}
+        {groups.map((item) => {
+          const hasTopDarkHorse = darkHorseRanking.slice(0, 8).some((candidate) => candidate.team.group === item.name);
+          return <Button key={item.name} variant={activeGroup === item.name ? "default" : "outline"} size="sm" className="relative" onClick={() => setActiveGroup(item.name)}>Group {item.name}{hasTopDarkHorse ? <span className="absolute -right-1 -top-1 size-2 rounded-full bg-orange-400" /> : null}</Button>;
+        })}
       </div>
       <Card className="border-primary/15 bg-primary/5">
-        <CardHeader><CardTitle className="flex items-center justify-between">Group {group.name}<Badge>死亡之组 {group.strength}</Badge></CardTitle></CardHeader>
-        <CardContent className="grid grid-cols-2 gap-3">
-          <div className="rounded-2xl bg-black/20 p-4"><p className="text-xs text-muted-foreground">整体强度</p><strong className="mt-2 block text-3xl text-primary">{group.strength}</strong><Progress value={group.strength} className="mt-3" /></div>
-          <div className="rounded-2xl bg-black/20 p-4"><p className="text-xs text-muted-foreground">实力接近</p><strong className="mt-2 block text-3xl text-cyan-300">{group.closeness}</strong><Progress value={group.closeness} className="mt-3" /></div>
+        <CardHeader><CardTitle className="flex items-center justify-between">Group {group.name}<Badge>小组强度 {group.strength}</Badge></CardTitle></CardHeader>
+        <CardContent className="flex flex-col gap-3">
+          <div className="flex items-center gap-3 rounded-2xl bg-black/20 p-4"><div className="flex-1"><p className="text-xs text-muted-foreground">整体强度</p><strong className="mt-1 block text-3xl text-primary">{group.strength}</strong><Progress value={group.strength} className="mt-2" /></div><div className="grid gap-1"><Button size="sm" variant={featuredType === "strongest" ? "default" : "outline"} onClick={() => setFeaturedType("strongest")}>最强对阵</Button><Button size="sm" variant={featuredType === "upset" ? "default" : "outline"} className={cn(featuredType === "upset" && "bg-orange-400 text-slate-950 hover:bg-orange-300")} onClick={() => setFeaturedType("upset")}>爆冷对阵</Button></div></div>
+          <button type="button" onClick={() => onPredict(featuredHome, featuredAway)} className="flex items-center justify-between rounded-2xl border border-white/8 bg-card/55 p-3 text-left transition hover:border-primary/30">
+            <div><p className="text-[10px] font-bold text-muted-foreground">{featuredType === "strongest" ? "组内最高 Elo 对决" : `爆冷风险 ${featuredPrediction.upsetRisk}%`}</p><p className="mt-1 font-black">{featuredHome.flag} {featuredHome.name} <span className="px-1 text-xs text-muted-foreground">VS</span> {featuredAway.name} {featuredAway.flag}</p></div><span className="text-xs font-bold text-primary">预测 →</span>
+          </button>
+          {groupDarkHorse ? <div className="dark-horse-card relative overflow-hidden rounded-2xl border border-orange-400/20 bg-orange-400/[.04] p-3"><div className="relative flex items-center justify-between"><div><p className="text-[10px] font-bold text-orange-300">本组黑马观察</p><p className="mt-1 font-black">{groupDarkHorse.team.flag} {groupDarkHorse.team.name}</p><p className="mt-1 text-[10px] text-muted-foreground">{groupDarkHorse.reason}</p></div><div className="text-right"><strong className="text-3xl text-orange-300">{groupDarkHorse.index}</strong><p className="text-[9px] text-muted-foreground">黑马指数</p></div></div></div> : null}
         </CardContent>
       </Card>
       <div className="grid grid-cols-2 gap-3">
-        {group.teams.map((team) => (
+        {rankedTeams.map((team, index) => {
+          const darkHorse = groupDarkHorse?.team.id === team.id ? groupDarkHorse : undefined;
+          return (
           <button key={team.id} onClick={() => onSelect(team)} className={cn("flex flex-col items-start gap-4 rounded-3xl border bg-card/60 p-4 text-left transition hover:border-primary/50", selectedTeam?.id === team.id ? "border-primary bg-primary/8 shadow-[0_0_24px_rgba(190,255,0,.1)]" : "border-white/8")}>
-            <span className="text-4xl">{team.flag}</span><div><p className="text-lg font-bold">{team.name}</p><p className="text-xs text-muted-foreground">{getTeamHistory(team.id)?.matchesAvailable.toLocaleString() ?? 0} 场历史比赛</p></div><span className="text-xs font-semibold text-primary">{selectedTeam?.id === team.id ? "已选择 1/2" : "选择预测 →"}</span>
+            <div className="flex w-full items-start justify-between"><span className="text-4xl">{team.flag}</span><div className="text-right"><strong className="font-mono text-2xl text-primary">#{index + 1}</strong><p className="text-[9px] text-muted-foreground">组内实力</p></div></div><div><p className="text-lg font-bold">{team.name}</p><p className="text-xs text-muted-foreground">Elo {team.elo} · {getTeamHistory(team.id)?.matchesAvailable.toLocaleString() ?? 0} 场历史比赛</p></div>{darkHorse ? <Badge variant="outline" className="border-orange-400/25 text-orange-300"><Flame data-icon="inline-start" /> 黑马 {darkHorse.index}</Badge> : null}<span className="text-xs font-semibold text-primary">{selectedTeam?.id === team.id ? "已选择 1/2" : "选择预测 →"}</span>
           </button>
-        ))}
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function PredictionResultScreen({
+  home,
+  away,
+  result,
+  onClose,
+  onSelectFactor,
+}: {
+  home: Team;
+  away: Team;
+  result: Prediction;
+  onClose: () => void;
+  onSelectFactor: (factor: Prediction["factors"][number]) => void;
+}) {
+  const [showAnalysis, setShowAnalysis] = useState(false);
+  const score = predictScore(home, away);
+  return (
+    <div className="prediction-cinema fixed inset-0 z-40 overflow-y-auto bg-[#030914] text-foreground">
+      <div className="prediction-beam pointer-events-none fixed inset-0" />
+      <div className="relative mx-auto flex min-h-screen w-full max-w-3xl flex-col px-4 py-5 sm:px-8">
+        <header className="flex items-center justify-between">
+          <div><p className="text-xs font-bold tracking-[.24em] text-primary">MATCH ORACLE</p><p className="mt-1 text-xs text-muted-foreground">历史特征模型 · 比分分布推演</p></div>
+          <Button variant="outline" size="icon" className="rounded-full border-white/10 bg-white/5" onClick={onClose}><X /></Button>
+        </header>
+        <div className="flex flex-1 flex-col justify-center py-10 text-center">
+          <div className="result-announcement mx-auto flex items-center gap-2 text-sm font-black text-primary"><Sparkles /> 预测结果已生成</div>
+          <div className="mt-8 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+            <div><span className="text-6xl">{home.flag}</span><h2 className="mt-3 text-2xl font-black">{home.name}</h2></div>
+            <div className="score-reveal relative">
+              <div className="score-ring absolute inset-1/2 size-40 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/25" />
+              <p className="text-xs font-bold text-muted-foreground">首选比分</p>
+              <strong className="result-number relative mt-2 block font-mono text-7xl text-primary sm:text-8xl">{score.recommended.homeGoals}:{score.recommended.awayGoals}</strong>
+              <Badge className="mt-3">{score.recommended.label}</Badge>
+            </div>
+            <div><span className="text-6xl">{away.flag}</span><h2 className="mt-3 text-2xl font-black">{away.name}</h2></div>
+          </div>
+          <div className="mx-auto mt-10 w-full max-w-xl rounded-3xl border border-white/8 bg-white/[.03] p-5 backdrop-blur">
+            <div className="grid grid-cols-3 text-center">
+              <div><strong className="result-number text-3xl text-primary"><CountUpNumber value={result.home} /></strong><p className="mt-1 text-xs text-muted-foreground">{home.name}胜</p></div>
+              <div><strong className="result-number text-3xl text-cyan-300"><CountUpNumber value={result.draw} /></strong><p className="mt-1 text-xs text-muted-foreground">平局</p></div>
+              <div><strong className="result-number text-3xl text-orange-400"><CountUpNumber value={result.away} /></strong><p className="mt-1 text-xs text-muted-foreground">{away.name}胜</p></div>
+            </div>
+            <ProbabilityBar home={result.home} draw={result.draw} away={result.away} />
+            <div className="mt-4 flex items-center justify-between text-xs"><span className="text-muted-foreground">模型可信度</span><strong className="text-cyan-200">{result.confidence}% · {confidenceLabel(result.confidence)}</strong></div>
+          </div>
+          <div className="mx-auto mt-5 w-full max-w-xl"><ScoreScenarioGrid prediction={score} /></div>
+          <div className="mx-auto mt-6 flex w-full max-w-xl gap-2">
+            <Button size="lg" className="flex-1" onClick={() => setShowAnalysis((current) => !current)}><Eye data-icon="inline-start" /> {showAnalysis ? "收起分析" : "查看分析"}</Button>
+            <Button size="lg" variant="outline" className="border-white/10" onClick={onClose}>调整对阵</Button>
+          </div>
+        </div>
+        {showAnalysis ? (
+          <section className="analysis-reveal pb-10"><h2 className="mb-3 text-lg font-black">决定结果的因素</h2><div className="grid gap-2 sm:grid-cols-2">{result.factors.map((factor) => <button type="button" onClick={() => onSelectFactor(factor)} key={factor.label} className="flex items-center justify-between gap-3 rounded-2xl border border-white/8 bg-card/50 p-4 text-left transition hover:border-primary/35"><div><p className="font-semibold">{factor.label} <span className="text-primary">→</span></p><p className="text-xs text-muted-foreground">{factor.value}</p></div></button>)}</div><p className="mt-4 text-xs leading-6 text-muted-foreground">比分预测基于预期进球与 Poisson 分布；当前尚未接入最终阵容、伤停与赛前赔率。</p></section>
+        ) : null}
       </div>
     </div>
   );
@@ -236,12 +367,7 @@ function PredictView({ initialHome, initialAway }: { initialHome: Team; initialA
     const stageTimers = analysisStages.slice(1).map((_, index) =>
       window.setTimeout(() => setActiveStage(index + 1), (index + 1) * 720),
     );
-    const resultTimer = window.setTimeout(() => {
-      setPhase("result");
-      window.setTimeout(() => {
-        document.getElementById("prediction-result")?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 150);
-    }, analysisStages.length * 720 + 350);
+    const resultTimer = window.setTimeout(() => setPhase("result"), analysisStages.length * 720 + 350);
 
     return () => {
       stageTimers.forEach(window.clearTimeout);
@@ -327,24 +453,7 @@ function PredictView({ initialHome, initialAway }: { initialHome: Team; initialA
           </CardContent>
         </Card>
       ) : null}
-      {phase === "result" ? (
-        <div id="prediction-result" className="prediction-result scroll-mt-5 flex flex-col gap-4">
-          <div className="result-announcement flex items-center justify-center gap-2 text-sm font-bold text-primary"><Sparkles /> 预测已生成</div>
-          <Card className="result-card relative overflow-hidden border-primary/30 bg-primary/5">
-            <CardContent className="relative flex flex-col gap-5 p-5">
-              <div className="grid grid-cols-3 text-center">
-                <div><strong className="result-number text-4xl text-primary"><CountUpNumber value={result.home} /></strong><p className="mt-1 text-xs text-muted-foreground">{home.name}胜</p></div>
-                <div><strong className="result-number text-4xl text-cyan-300"><CountUpNumber value={result.draw} /></strong><p className="mt-1 text-xs text-muted-foreground">平局</p></div>
-                <div><strong className="result-number text-4xl text-orange-400"><CountUpNumber value={result.away} /></strong><p className="mt-1 text-xs text-muted-foreground">{away.name}胜</p></div>
-              </div>
-              <ProbabilityBar home={result.home} draw={result.draw} away={result.away} />
-              <div className="flex items-center justify-between rounded-xl border border-cyan-300/10 bg-black/25 p-3"><span className="text-sm">模型可信度</span><strong className="text-lg text-cyan-300"><CountUpNumber value={result.confidence} /> · {confidenceLabel(result.confidence)}</strong></div>
-              <p className="text-xs leading-relaxed text-muted-foreground">当前为历史数据模型，尚未接入赛前赔率、最终阵容与伤停信息。</p>
-            </CardContent>
-          </Card>
-          <section><h2 className="mb-3 text-lg font-bold">决定结果的因素</h2><div className="flex flex-col gap-2">{result.factors.map((factor) => <button type="button" onClick={() => setSelectedFactor(factor)} key={factor.label} className="flex items-center justify-between gap-3 rounded-2xl border border-white/8 bg-card/50 p-4 text-left transition hover:border-primary/35"><div><p className="font-semibold">{factor.label} <span className="text-primary">→</span></p><p className="text-xs text-muted-foreground">{factor.value}</p></div><Badge variant="outline" className={factor.impact === "home" ? "shrink-0 border-primary/30 text-primary" : factor.impact === "away" ? "shrink-0 border-orange-400/30 text-orange-300" : "shrink-0 border-cyan-300/30 text-cyan-300"}>{factor.impact === "home" ? home.name : factor.impact === "away" ? away.name : "均衡"}</Badge></button>)}</div></section>
-        </div>
-      ) : null}
+      {phase === "result" ? <PredictionResultScreen home={home} away={away} result={result} onClose={() => setPhase("idle")} onSelectFactor={setSelectedFactor} /> : null}
       <Drawer open={selectedFactor !== null} onOpenChange={(open) => { if (!open) setSelectedFactor(null); }}>
         <DrawerContent className="border-white/10 bg-popover/98">
           <DrawerHeader className="text-left">
@@ -391,14 +500,14 @@ export function WorldCupApp() {
     <main className="stadium-grid min-h-screen bg-background pb-28 text-foreground">
       <div className="mx-auto w-full max-w-xl px-4 py-6 md:max-w-3xl md:px-8 md:py-10">
         {view === "today" ? <TodayView onPredict={startPrediction} /> : null}
-        {view === "groups" ? <GroupsView selectedTeam={pendingTeam} onSelect={selectFromGroup} onClear={() => setPendingTeam(null)} /> : null}
+        {view === "groups" ? <GroupsView selectedTeam={pendingTeam} onSelect={selectFromGroup} onPredict={startPrediction} onClear={() => setPendingTeam(null)} /> : null}
         {view === "predict" ? <PredictView key={`${selected[0].id}-${selected[1].id}`} initialHome={selected[0]} initialAway={selected[1]} /> : null}
         {view === "more" ? <div className="flex flex-col gap-5"><h1 className="text-3xl font-black">更多数据</h1><Card><CardContent className="p-5"><h2 className="font-bold">历史数据已接入</h2><p className="mt-2 text-sm text-muted-foreground">本地历史库包含 {historyMetadata.totalPlayedMatches.toLocaleString()} 场已完赛国家队比赛，数据截止 {historyMetadata.latestPlayedDate}。</p><div className="mt-4 flex flex-wrap gap-2"><Badge variant="outline">来源：martj42/international_results</Badge><Badge variant="outline">许可：CC0-1.0</Badge><Badge variant="outline">近期半衰期：{historyMetadata.recencyHalfLifeYears} 年</Badge></div></CardContent></Card><Card><CardContent className="p-5"><h2 className="font-bold">模型过去表现</h2><p className="mt-2 text-sm text-muted-foreground">时间切分回测与 Brier Score 将在下一阶段接入。</p></CardContent></Card></div> : null}
       </div>
       <nav className="fixed inset-x-0 bottom-0 z-20 mx-auto grid max-w-xl grid-cols-4 border-t border-white/8 bg-[#07111d]/95 px-2 pb-[max(.75rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur-xl">
         {([
           ["today", "今日", CalendarDays],
-          ["groups", "小组", Users],
+          ["groups", "小组/黑马", Users],
           ["predict", "预测", BarChart3],
           ["more", "更多", CircleGauge],
         ] as const).map(([id, label, Icon]) => (

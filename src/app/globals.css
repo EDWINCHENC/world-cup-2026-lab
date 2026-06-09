@@ -149,6 +149,43 @@
     pointer-events: none;
   }
 
+  .dark-horse-card::before {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 0% 0%, oklch(0.72 0.2 45 / 16%), transparent 38%),
+      linear-gradient(135deg, transparent, oklch(0.91 0.23 126 / 4%));
+    content: "";
+    pointer-events: none;
+  }
+
+  .score-oracle {
+    background-image: radial-gradient(circle at 50% 40%, oklch(0.91 0.23 126 / 12%), transparent 45%);
+  }
+
+  .prediction-cinema {
+    animation: cinema-in 550ms cubic-bezier(.2,.8,.2,1);
+    background-image:
+      linear-gradient(oklch(1 0 0 / 2%) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(1 0 0 / 2%) 1px, transparent 1px),
+      radial-gradient(circle at 50% 42%, oklch(0.3 0.11 220 / 38%), transparent 38%);
+    background-size: 42px 42px, 42px 42px, auto;
+  }
+
+  .prediction-beam {
+    background: conic-gradient(from 180deg at 50% 45%, transparent 0 38%, oklch(0.91 0.23 126 / 7%) 48%, transparent 58% 100%);
+    animation: result-scan 7s linear infinite;
+  }
+
+  .score-ring {
+    box-shadow: 0 0 70px oklch(0.91 0.23 126 / 16%), inset 0 0 50px oklch(0.78 0.16 214 / 8%);
+    animation: score-ring 2.2s ease-in-out infinite;
+  }
+
+  .analysis-reveal {
+    animation: analysis-in 400ms cubic-bezier(.2,.8,.2,1);
+  }
+
   .prediction-result {
     animation: result-in 650ms cubic-bezier(.2,.8,.2,1);
   }
@@ -231,6 +268,16 @@
   0% { opacity: 0; filter: blur(8px); transform: scale(.65); }
   65% { opacity: 1; filter: blur(0); transform: scale(1.08); }
   100% { transform: scale(1); }
+}
+
+@keyframes cinema-in {
+  from { opacity: 0; filter: blur(14px); transform: scale(1.04); }
+  to { opacity: 1; filter: blur(0); transform: scale(1); }
+}
+
+@keyframes score-ring {
+  0%, 100% { opacity: .45; transform: translate(-50%, -50%) scale(.88); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
 }
 
 @media (prefers-reduced-motion: reduce) {

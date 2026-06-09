@@ -42,29 +42,34 @@ export function predictScore(home: Team, away: Team): ScorePrediction {
   const expectedHomeGoals = clamp(0.35, 1.32 + homeMatchup * 0.018 + eloDifference / 900, 3.4);
   const expectedAwayGoals = clamp(0.3, 1.12 + awayMatchup * 0.018 - eloDifference / 900, 3.2);
   const outcomeWeights = { home: result.home / 100, draw: result.draw / 100, away: result.away / 100 };
-  const candidates: Omit<ScoreScenario, "recommended">[] = [];
+  const candidates: (Omit<ScoreScenario, "recommended"> & { rankScore: number })[] = [];
 
   for (let homeGoals = 0; homeGoals <= 5; homeGoals += 1) {
     for (let awayGoals = 0; awayGoals <= 5; awayGoals += 1) {
       const outcome = homeGoals > awayGoals ? "home" : homeGoals < awayGoals ? "away" : "draw";
+      const scoreProbability = poisson(expectedHomeGoals, homeGoals) * poisson(expectedAwayGoals, awayGoals);
       candidates.push({
         outcome,
         label: outcome === "home" ? `${home.name}胜` : outcome === "away" ? `${away.name}胜` : "平局",
         homeGoals,
         awayGoals,
-        probability: poisson(expectedHomeGoals, homeGoals) * poisson(expectedAwayGoals, awayGoals) * outcomeWeights[outcome],
+        probability: scoreProbability,
+        rankScore: scoreProbability * Math.sqrt(outcomeWeights[outcome]),
       });
     }
   }
 
   const bestByOutcome = (["home", "draw", "away"] as const).map((outcome) =>
-    candidates.filter((candidate) => candidate.outcome === outcome).toSorted((a, b) => b.probability - a.probability)[0],
+    candidates.filter((candidate) => candidate.outcome === outcome).toSorted((a, b) => b.rankScore - a.rankScore)[0],
   );
-  const recommendedCandidate = bestByOutcome.toSorted((a, b) => b.probability - a.probability)[0];
+  const recommendedCandidate = bestByOutcome.toSorted((a, b) => b.rankScore - a.rankScore)[0];
   const scenarios = bestByOutcome.map((scenario) => ({
-    ...scenario,
+    outcome: scenario.outcome,
+    label: scenario.label,
+    homeGoals: scenario.homeGoals,
+    awayGoals: scenario.awayGoals,
     probability: Math.max(1, Math.round(scenario.probability * 100)),
-    recommended: scenario === recommendedCandidate,
+    recommended: scenario.outcome === recommendedCandidate.outcome,
   }));
 
   return {
