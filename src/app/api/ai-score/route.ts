@@ -5,29 +5,158 @@ import { matches, teamById } from "@/lib/world-cup-data";
 import type { AiScorePrediction } from "@/lib/ai-score-types";
 
 const defaultGeminiBaseUrl = "https://generativelanguage.googleapis.com";
+const defaultOpenAiBaseUrl = "https://api.openai.com/v1";
 const requestWindowMs = 60_000;
 const requestsByIp = new Map<string, { count: number; startedAt: number }>();
 const predictionCache = new Map<string, { data: AiScorePrediction; expiresAt: number }>();
+
+type AiProvider = "gemini" | "openai";
 
 function readPositiveInteger(value: string | undefined, fallback: number) {
   const parsed = Number(value);
   return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
 }
 
-function getConfig() {
-  const baseUrl = process.env.GEMINI_API_BASE_URL ?? process.env.GEMINI_PROXY_BASE_URL ?? defaultGeminiBaseUrl;
-  const parsedBaseUrl = new URL(baseUrl);
+function parseBaseUrl(value: string, variableName: string) {
+  const parsedBaseUrl = new URL(value);
   if (!["http:", "https:"].includes(parsedBaseUrl.protocol)) {
-    throw new Error("GEMINI_API_BASE_URL must use HTTP or HTTPS.");
+    throw new Error(`${variableName} must use HTTP or HTTPS.`);
+  }
+  return parsedBaseUrl.toString().replace(/\/+$/, "");
+}
+
+function getConfig() {
+  const provider = (process.env.AI_PROVIDER ?? "gemini").toLowerCase() as AiProvider;
+  if (!["gemini", "openai"].includes(provider)) {
+    throw new Error("AI_PROVIDER must be gemini or openai.");
   }
 
+  const baseUrl = provider === "openai"
+    ? parseBaseUrl(process.env.OPENAI_API_BASE_URL ?? defaultOpenAiBaseUrl, "OPENAI_API_BASE_URL")
+    : parseBaseUrl(
+      process.env.GEMINI_API_BASE_URL ?? process.env.GEMINI_PROXY_BASE_URL ?? defaultGeminiBaseUrl,
+      "GEMINI_API_BASE_URL",
+    );
+  const apiKey = provider === "openai" ? process.env.OPENAI_API_KEY : process.env.GEMINI_API_KEY;
+  const model = provider === "openai"
+    ? process.env.OPENAI_MODEL ?? "gpt-4.1-mini"
+    : process.env.GEMINI_MODEL ?? "gemini-3-flash-preview";
+
   return {
-    apiKey: process.env.GEMINI_API_KEY,
-    baseUrl: parsedBaseUrl.toString().replace(/\/+$/, ""),
-    model: process.env.GEMINI_MODEL ?? "gemini-3-flash-preview",
+    provider,
+    apiKey,
+    baseUrl,
+    model,
+    cacheKeyPrefix: `${provider}:${baseUrl}:${model}`,
+    openAiJsonMode: process.env.OPENAI_JSON_MODE !== "false",
     requestLimit: readPositiveInteger(process.env.AI_SCORE_REQUESTS_PER_MINUTE, 8),
     cacheTtlMs: readPositiveInteger(process.env.AI_SCORE_CACHE_TTL_SECONDS, 43_200) * 1000,
   };
+}
+
+function parsePredictionJson(text: string) {
+  const normalized = text.trim().replace(/^```json\s*/i, "").replace(/\s*```$/, "");
+  return JSON.parse(normalized) as Omit<AiScorePrediction, "model">;
+}
+
+function buildResponseSchema() {
+  return {
+    type: "OBJECT",
+    required: ["recommended", "scenarios", "summary", "decisiveFactors", "riskNote"],
+    properties: {
+      recommended: {
+        type: "OBJECT",
+        required: ["homeGoals", "awayGoals", "confidence"],
+        properties: {
+          homeGoals: { type: "INTEGER" },
+          awayGoals: { type: "INTEGER" },
+          confidence: { type: "INTEGER" },
+        },
+      },
+      scenarios: {
+        type: "ARRAY",
+        minItems: 3,
+        maxItems: 3,
+        items: {
+          type: "OBJECT",
+          required: ["outcome", "homeGoals", "awayGoals", "rationale"],
+          properties: {
+            outcome: { type: "STRING", enum: ["home", "draw", "away"] },
+            homeGoals: { type: "INTEGER" },
+            awayGoals: { type: "INTEGER" },
+            rationale: { type: "STRING" },
+          },
+        },
+      },
+      summary: { type: "STRING" },
+      decisiveFactors: { type: "ARRAY", items: { type: "STRING" } },
+      riskNote: { type: "STRING" },
+    },
+  };
+}
+
+async function requestGemini(config: ReturnType<typeof getConfig>, prompt: string, signal: AbortSignal) {
+  const endpoint = `${config.baseUrl}/v1beta/models/${encodeURIComponent(config.model)}:generateContent`;
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-goog-api-key": config.apiKey!,
+    },
+    signal,
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: {
+        temperature: 0.35,
+        responseMimeType: "application/json",
+        responseSchema: buildResponseSchema(),
+      },
+    }),
+  });
+  const data = (await response.json()) as {
+    error?: { message?: string };
+    candidates?: { content?: { parts?: { text?: string }[] } }[];
+  };
+  if (!response.ok) throw new Error(data.error?.message ?? `Gemini request failed with ${response.status}.`);
+  const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!text) throw new Error("Gemini did not return a prediction.");
+  return parsePredictionJson(text);
+}
+
+async function requestOpenAi(config: ReturnType<typeof getConfig>, prompt: string, signal: AbortSignal) {
+  const endpoint = `${config.baseUrl}/chat/completions`;
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${config.apiKey}`,
+      "Content-Type": "application/json",
+    },
+    signal,
+    body: JSON.stringify({
+      model: config.model,
+      temperature: 0.35,
+      ...(config.openAiJsonMode ? { response_format: { type: "json_object" } } : {}),
+      messages: [
+        { role: "system", content: "你是谨慎的国际足球赛前分析师。必须只返回合法 JSON，不要使用 Markdown。" },
+        { role: "user", content: prompt },
+      ],
+    }),
+  });
+  const data = (await response.json()) as {
+    error?: { message?: string };
+    choices?: { message?: { content?: string | { text?: string }[] } }[];
+  };
+  if (!response.ok) throw new Error(data.error?.message ?? `OpenAI-compatible request failed with ${response.status}.`);
+  const content = data.choices?.[0]?.message?.content;
+  const text = typeof content === "string" ? content : content?.map((part) => part.text ?? "").join("");
+  if (!text) throw new Error("OpenAI-compatible API did not return a prediction.");
+  return parsePredictionJson(text);
+}
+
+async function requestPrediction(config: ReturnType<typeof getConfig>, prompt: string, signal: AbortSignal) {
+  return config.provider === "openai"
+    ? requestOpenAi(config, prompt, signal)
+    : requestGemini(config, prompt, signal);
 }
 
 function isRateLimited(ip: string, requestLimit: number) {
@@ -61,21 +190,16 @@ function json(data: unknown, init?: ResponseInit) {
   });
 }
 
-function parseGeminiJson(text: string) {
-  const normalized = text.trim().replace(/^```json\s*/i, "").replace(/\s*```$/, "");
-  return JSON.parse(normalized) as Omit<AiScorePrediction, "model">;
-}
-
 function validatePrediction(prediction: Omit<AiScorePrediction, "model">) {
   if (!prediction.recommended || !Array.isArray(prediction.scenarios) || prediction.scenarios.length !== 3) {
-    throw new Error("Gemini returned an incomplete score prediction.");
+    throw new Error("AI provider returned an incomplete score prediction.");
   }
   const validScore = (value: number) => Number.isInteger(value) && value >= 0 && value <= 9;
   if (!validScore(prediction.recommended.homeGoals) || !validScore(prediction.recommended.awayGoals)) {
-    throw new Error("Gemini returned an invalid recommended score.");
+    throw new Error("AI provider returned an invalid recommended score.");
   }
   if (!Array.isArray(prediction.decisiveFactors) || prediction.decisiveFactors.length < 2) {
-    throw new Error("Gemini returned incomplete decisive factors.");
+    throw new Error("AI provider returned incomplete decisive factors.");
   }
 }
 
@@ -91,12 +215,6 @@ export async function POST(request: Request) {
   const match = matches.find((item) => item.id === body?.matchId);
   if (!match) return json({ error: "比赛不存在。" }, { status: 400 });
 
-  removeExpiredEntries();
-  const cached = predictionCache.get(match.id);
-  if (cached && cached.expiresAt > Date.now()) {
-    return json(cached.data, { headers: { "X-AI-Cache": "HIT" } });
-  }
-
   let config: ReturnType<typeof getConfig>;
   try {
     config = getConfig();
@@ -105,6 +223,13 @@ export async function POST(request: Request) {
     return json({ error: "AI 服务配置无效。" }, { status: 503 });
   }
   if (!config.apiKey) return json({ error: "AI 服务尚未配置。" }, { status: 503 });
+
+  removeExpiredEntries();
+  const cacheKey = `${config.cacheKeyPrefix}:${match.id}`;
+  const cached = predictionCache.get(cacheKey);
+  if (cached && cached.expiresAt > Date.now()) {
+    return json(cached.data, { headers: { "X-AI-Cache": "HIT" } });
+  }
 
   const ip = request.headers.get("x-real-ip")
     ?? request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
@@ -151,69 +276,13 @@ export async function POST(request: Request) {
 返回简洁中文 JSON。给出一个最推荐比分，并分别提供主胜、平局、客胜三个比分剧本。confidence 为 0-100 的整数。
 `.trim();
 
-  const endpoint = `${config.baseUrl}/v1beta/models/${encodeURIComponent(config.model)}:generateContent`;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 30_000);
 
   try {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-goog-api-key": config.apiKey,
-      },
-      signal: controller.signal,
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: {
-          temperature: 0.35,
-          responseMimeType: "application/json",
-          responseSchema: {
-            type: "OBJECT",
-            required: ["recommended", "scenarios", "summary", "decisiveFactors", "riskNote"],
-            properties: {
-              recommended: {
-                type: "OBJECT",
-                required: ["homeGoals", "awayGoals", "confidence"],
-                properties: {
-                  homeGoals: { type: "INTEGER" },
-                  awayGoals: { type: "INTEGER" },
-                  confidence: { type: "INTEGER" },
-                },
-              },
-              scenarios: {
-                type: "ARRAY",
-                minItems: 3,
-                maxItems: 3,
-                items: {
-                  type: "OBJECT",
-                  required: ["outcome", "homeGoals", "awayGoals", "rationale"],
-                  properties: {
-                    outcome: { type: "STRING", enum: ["home", "draw", "away"] },
-                    homeGoals: { type: "INTEGER" },
-                    awayGoals: { type: "INTEGER" },
-                    rationale: { type: "STRING" },
-                  },
-                },
-              },
-              summary: { type: "STRING" },
-              decisiveFactors: { type: "ARRAY", items: { type: "STRING" } },
-              riskNote: { type: "STRING" },
-            },
-          },
-        },
-      }),
-    });
-    const gemini = (await response.json()) as {
-      error?: { message?: string };
-      candidates?: { content?: { parts?: { text?: string }[] } }[];
-    };
-    if (!response.ok) throw new Error(gemini.error?.message ?? `Gemini request failed with ${response.status}.`);
-    const text = gemini.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!text) throw new Error("Gemini did not return a prediction.");
-    const prediction = parseGeminiJson(text);
+    const prediction = await requestPrediction(config, prompt, controller.signal);
     validatePrediction(prediction);
-    predictionCache.set(match.id, { data: prediction, expiresAt: Date.now() + config.cacheTtlMs });
+    predictionCache.set(cacheKey, { data: prediction, expiresAt: Date.now() + config.cacheTtlMs });
     return json(prediction, { headers: { "X-AI-Cache": "MISS" } });
   } catch (error) {
     const message = error instanceof Error && error.name === "AbortError"
