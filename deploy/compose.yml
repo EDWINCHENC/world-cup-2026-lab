@@ -1,0 +1,12 @@
+services:
+  world-cup-2026:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: world-cup-2026
+    restart: unless-stopped
+    env_file:
+      - path: ../.env.production
+        required: false
+    ports:
+      - "127.0.0.1:3000:3000"

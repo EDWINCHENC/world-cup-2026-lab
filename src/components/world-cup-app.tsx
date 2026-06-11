@@ -14,6 +14,7 @@ import {
   Flame,
   Info,
   LoaderCircle,
+  Share2,
   ShieldCheck,
   Sparkles,
   Users,
@@ -26,6 +27,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
 import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
+import type { AiScorePrediction } from "@/lib/ai-score-types";
 import { getTeamHistory, historyMetadata } from "@/lib/history";
 import { darkHorseRanking, predictScore, type ScorePrediction } from "@/lib/insights";
 import { availableMatchDates, groups, matches, scheduleMetadata, teamById, teams, type Match, type Team } from "@/lib/world-cup-data";
@@ -47,6 +49,78 @@ const formatMatchDate = (date: string) =>
     new Date(`${date}T12:00:00+08:00`),
   );
 const confidenceLabel = (confidence: number) => (confidence >= 80 ? "较高" : confidence >= 65 ? "中等" : "偏低");
+const aiAnalysisStages = ["封装历史数据", "AI 多路径推演", "校验胜率与比分", "生成最终判断"];
+
+async function shareAiPrediction(home: Team, away: Team, prediction: AiScorePrediction) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1080;
+  canvas.height = 1440;
+  const context = canvas.getContext("2d");
+  if (!context) return;
+
+  const gradient = context.createLinearGradient(0, 0, 1080, 1440);
+  gradient.addColorStop(0, "#03101c");
+  gradient.addColorStop(1, "#081522");
+  context.fillStyle = gradient;
+  context.fillRect(0, 0, 1080, 1440);
+  context.strokeStyle = "rgba(255,255,255,.06)";
+  for (let value = 0; value <= 1080; value += 72) {
+    context.beginPath(); context.moveTo(value, 0); context.lineTo(value, 1440); context.stroke();
+  }
+  for (let value = 0; value <= 1440; value += 72) {
+    context.beginPath(); context.moveTo(0, value); context.lineTo(1080, value); context.stroke();
+  }
+
+  context.textAlign = "center";
+  context.fillStyle = "#b6ff00";
+  context.font = "700 30px system-ui";
+  context.fillText("世界杯预测实验室 · AI 猜比分", 540, 120);
+  context.fillStyle = "#ffffff";
+  context.font = "800 54px system-ui";
+  context.fillText(`${home.flag}  ${home.name}  VS  ${away.name}  ${away.flag}`, 540, 260);
+  context.fillStyle = "#b6ff00";
+  context.font = "900 190px monospace";
+  context.fillText(`${prediction.recommended.homeGoals}:${prediction.recommended.awayGoals}`, 540, 510);
+  context.fillStyle = "#8da0ad";
+  context.font = "600 28px system-ui";
+  context.fillText(`AI 可信度 ${prediction.recommended.confidence}%`, 540, 575);
+
+  context.fillStyle = "rgba(255,255,255,.06)";
+  context.roundRect(80, 650, 920, 250, 32);
+  context.fill();
+  context.fillStyle = "#ffffff";
+  context.font = "700 30px system-ui";
+  const summaryLines = prediction.summary.match(/.{1,26}/g) ?? [prediction.summary];
+  summaryLines.slice(0, 4).forEach((line, index) => context.fillText(line, 540, 720 + index * 48));
+
+  context.textAlign = "left";
+  context.fillStyle = "#55eaff";
+  context.font = "700 28px system-ui";
+  context.fillText("AI 关键判断", 90, 990);
+  context.fillStyle = "#dce7ec";
+  context.font = "500 25px system-ui";
+  prediction.decisiveFactors.slice(0, 4).forEach((factor, index) => context.fillText(`●  ${factor.slice(0, 30)}`, 100, 1050 + index * 55));
+  context.fillStyle = "#71838f";
+  context.font = "500 22px system-ui";
+  context.fillText("预测仅供观赛参考 · 未接入最终阵容与伤停信息", 90, 1340);
+
+  const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/png"));
+  if (!blob) return;
+  const file = new File([blob], `${home.sourceName}-vs-${away.sourceName}-ai-score.png`, { type: "image/png" });
+  if (navigator.canShare?.({ files: [file] })) {
+    try {
+      await navigator.share({ title: `${home.name} vs ${away.name} AI 猜比分`, files: [file] });
+      return;
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") return;
+    }
+  }
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = file.name;
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
 
 function CountUpNumber({ value, suffix = "%" }: { value: number; suffix?: string }) {
   const [display, setDisplay] = useState(0);
@@ -109,32 +183,104 @@ function ScoreScenarioGrid({ prediction }: { prediction: ScorePrediction }) {
   );
 }
 
-function ScoreGuessDrawer({ match, onClose, onPredict }: { match: Match | null; onClose: () => void; onPredict: (home: Team, away: Team) => void }) {
+function ScoreGuessDrawer({ match, onClose }: { match: Match | null; onClose: () => void }) {
   const home = match ? teamById.get(match.homeId)! : null;
   const away = match ? teamById.get(match.awayId)! : null;
-  const score = home && away ? predictScore(home, away) : null;
+  const [predictionState, setPredictionState] = useState<{ key: string; data: AiScorePrediction } | null>(null);
+  const [errorState, setErrorState] = useState<{ key: string; message: string } | null>(null);
+  const [stageState, setStageState] = useState<{ key: string; stage: number } | null>(null);
+  const [requestVersion, setRequestVersion] = useState(0);
+  const requestKey = match ? `${match.id}-${requestVersion}` : "";
+  const prediction = predictionState?.key === requestKey ? predictionState.data : null;
+  const error = errorState?.key === requestKey ? errorState.message : null;
+  const activeStage = stageState?.key === requestKey ? stageState.stage : 0;
+
+  useEffect(() => {
+    if (!match) return;
+    const controller = new AbortController();
+    const currentKey = `${match.id}-${requestVersion}`;
+    const stageTimer = window.setInterval(() => setStageState((current) => ({
+      key: currentKey,
+      stage: Math.min(current?.key === currentKey ? current.stage + 1 : 1, aiAnalysisStages.length - 1),
+    })), 1150);
+
+    fetch("/api/ai-score", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ matchId: match.id }),
+      signal: controller.signal,
+    })
+      .then(async (response) => {
+        const data = await response.json() as AiScorePrediction | { error?: string };
+        if (!response.ok) throw new Error("error" in data ? data.error : "AI 请求失败");
+        setPredictionState({ key: currentKey, data: data as AiScorePrediction });
+      })
+      .catch((requestError: Error) => {
+        if (requestError.name !== "AbortError") setErrorState({ key: currentKey, message: requestError.message || "AI 暂时无法完成预测，请重试。" });
+      })
+      .finally(() => window.clearInterval(stageTimer));
+
+    return () => {
+      controller.abort();
+      window.clearInterval(stageTimer);
+    };
+  }, [match, requestVersion]);
 
   return (
     <Drawer open={match !== null} onOpenChange={(open) => { if (!open) onClose(); }}>
       <DrawerContent className="border-white/10 bg-popover/98">
         <DrawerHeader className="text-left">
           <DrawerTitle className="flex items-center gap-2 text-xl font-black"><Bot className="text-primary" /> AI 猜比分</DrawerTitle>
-          <DrawerDescription>{home?.name} vs {away?.name} · {match ? formatMatchDate(match.date) : ""}</DrawerDescription>
+          <DrawerDescription>{home?.name} vs {away?.name} · AI 独立赛前推演</DrawerDescription>
         </DrawerHeader>
-        {home && away && score ? (
+        {home && away && !prediction && !error ? (
+          <div className="overflow-y-auto px-4 pb-8">
+            <div className="ai-oracle-loader relative overflow-hidden rounded-3xl border border-cyan-300/20 bg-cyan-300/[.04] p-6 text-center">
+              <div className="ai-data-stream pointer-events-none absolute inset-0" />
+              <div className="relative mx-auto grid size-28 place-items-center">
+                <div className="ai-orbit ai-orbit-one absolute inset-0 rounded-full border border-dashed border-primary/45" />
+                <div className="ai-orbit ai-orbit-two absolute inset-4 rounded-full border border-dashed border-cyan-300/35" />
+                <Bot className="size-11 text-primary" strokeWidth={1.5} />
+              </div>
+              <p className="relative mt-4 text-lg font-black">AI 正在推演比赛</p>
+              <p className="relative mt-1 text-xs text-muted-foreground">融合 Elo、近期状态、攻防特征与历史交锋</p>
+              <div className="relative mt-5 grid grid-cols-2 gap-2 text-left">
+                {aiAnalysisStages.map((stage, index) => (
+                  <div key={stage} className={cn("flex items-center gap-2 rounded-xl border px-3 py-2 text-xs transition", index === activeStage ? "border-primary/40 bg-primary/10 text-primary" : index < activeStage ? "border-cyan-300/15 text-cyan-200" : "border-white/6 text-muted-foreground")}>
+                    {index < activeStage ? <Check className="size-3.5" /> : index === activeStage ? <LoaderCircle className="size-3.5 animate-spin" /> : <span className="size-3.5 rounded-full border border-current opacity-40" />}
+                    {stage}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : null}
+        {home && away && error ? (
+          <div className="px-4 pb-8">
+            <div className="rounded-3xl border border-orange-400/20 bg-orange-400/5 p-5 text-center">
+              <p className="font-bold text-orange-300">AI 推演未完成</p>
+              <p className="mt-2 text-xs text-muted-foreground">{error}</p>
+              <Button className="mt-4" onClick={() => setRequestVersion((version) => version + 1)}><Sparkles data-icon="inline-start" /> 重新进行 AI 推演</Button>
+            </div>
+          </div>
+        ) : null}
+        {home && away && prediction ? (
           <div className="overflow-y-auto px-4 pb-8">
             <div className="score-oracle mb-4 rounded-3xl border border-primary/20 bg-primary/5 p-5 text-center">
-              <p className="text-xs text-muted-foreground">模型最推荐</p>
+              <p className="text-xs text-muted-foreground">AI 最推荐 · 可信度 {prediction.recommended.confidence}%</p>
               <div className="mt-2 flex items-center justify-center gap-4">
                 <span className="text-3xl">{home.flag}</span>
-                <strong className="font-mono text-6xl text-primary">{score.recommended.homeGoals}:{score.recommended.awayGoals}</strong>
+                <strong className="result-number font-mono text-6xl text-primary">{prediction.recommended.homeGoals}:{prediction.recommended.awayGoals}</strong>
                 <span className="text-3xl">{away.flag}</span>
               </div>
-              <p className="mt-2 text-sm font-bold">{score.recommended.label} · 预期进球 {score.expectedHomeGoals} / {score.expectedAwayGoals}</p>
+              <p className="mt-3 text-sm font-bold">{prediction.summary}</p>
             </div>
-            <ScoreScenarioGrid prediction={score} />
-            <p className="mt-4 text-xs leading-6 text-muted-foreground">基于 Elo、近期攻防评分推导双方预期进球，再使用 Poisson 分布计算具体比分。单一比分天然概率较低，建议结合胜平负概率判断。</p>
-            <Button className="mt-4 w-full" onClick={() => onPredict(home, away)}><BarChart3 data-icon="inline-start" /> 查看完整预测</Button>
+            <div className="grid grid-cols-3 gap-2">
+              {prediction.scenarios.map((scenario) => <div key={scenario.outcome} className="rounded-2xl border border-white/8 bg-white/[.03] p-3 text-center"><p className="text-[10px] text-muted-foreground">{scenario.outcome === "home" ? `${home.name}胜` : scenario.outcome === "away" ? `${away.name}胜` : "平局"}</p><strong className="mt-1 block font-mono text-2xl">{scenario.homeGoals}:{scenario.awayGoals}</strong><p className="mt-2 text-[9px] leading-4 text-muted-foreground">{scenario.rationale}</p></div>)}
+            </div>
+            <div className="mt-4 rounded-2xl border border-cyan-300/10 bg-cyan-300/[.03] p-4"><p className="text-xs font-bold text-cyan-200">AI 关键判断</p><div className="mt-2 flex flex-col gap-2">{prediction.decisiveFactors.map((factor) => <p key={factor} className="text-xs text-muted-foreground"><span className="mr-2 text-primary">●</span>{factor}</p>)}</div></div>
+            <p className="mt-4 text-xs leading-6 text-muted-foreground">{prediction.riskNote} · 未接入最终阵容与伤停信息。</p>
+            <Button className="mt-4 w-full" onClick={() => void shareAiPrediction(home, away, prediction)}><Share2 data-icon="inline-start" /> 分享截图</Button>
           </div>
         ) : null}
       </DrawerContent>
@@ -142,7 +288,7 @@ function ScoreGuessDrawer({ match, onClose, onPredict }: { match: Match | null; 
   );
 }
 
-function FeaturedMatch({ match, onPredict, onScore }: { match: Match; onPredict: (home: Team, away: Team) => void; onScore: (match: Match) => void }) {
+function FeaturedMatch({ match, onPredict, onScore }: { match: Match; onPredict: (home: Team, away: Team, autoStart?: boolean) => void; onScore: (match: Match) => void }) {
   const home = teamById.get(match.homeId)!;
   const away = teamById.get(match.awayId)!;
   const result = predictMatch(home, away);
@@ -177,7 +323,7 @@ function FeaturedMatch({ match, onPredict, onScore }: { match: Match; onPredict:
           <strong className="text-cyan-300">{result.confidence}% · {confidenceLabel(result.confidence)}</strong>
         </div>
         <div className="grid grid-cols-2 gap-2">
-          <Button className="h-12 font-bold shadow-[0_0_24px_rgba(190,255,0,.12)]" onClick={() => onPredict(home, away)}><BarChart3 data-icon="inline-start" /> 胜率/比分预测</Button>
+          <Button className="h-12 font-bold shadow-[0_0_24px_rgba(190,255,0,.12)]" onClick={() => onPredict(home, away, true)}><BarChart3 data-icon="inline-start" /> 胜率/比分预测</Button>
           <Button variant="outline" className="h-12 border-cyan-300/25 font-bold text-cyan-200" onClick={() => onScore(match)}><Bot data-icon="inline-start" /> AI 猜比分</Button>
         </div>
       </CardContent>
@@ -209,7 +355,7 @@ function MatchRow({ match, onPredict, onScore }: { match: Match; onPredict: (hom
   );
 }
 
-function TodayView({ onPredict }: { onPredict: (home: Team, away: Team) => void }) {
+function TodayView({ onPredict }: { onPredict: (home: Team, away: Team, autoStart?: boolean) => void }) {
   const [selectedDate, setSelectedDate] = useState(availableMatchDates[0]);
   const [scoreMatch, setScoreMatch] = useState<Match | null>(null);
   const selectedMatches = matches.filter((match) => match.date === selectedDate);
@@ -229,7 +375,7 @@ function TodayView({ onPredict }: { onPredict: (home: Team, away: Team) => void 
         <div className="flex items-end justify-between"><div><h2 className="text-xl font-bold">{formatMatchDate(selectedDate)}比赛</h2><p className="text-xs text-muted-foreground">开球时间尚未从可靠来源确认</p></div><span className="text-sm text-muted-foreground">共 {selectedMatches.length} 场</span></div>
         {selectedMatches.map((match) => <MatchRow key={match.id} match={match} onPredict={onPredict} onScore={setScoreMatch} />)}
       </section>
-      <ScoreGuessDrawer match={scoreMatch} onClose={() => setScoreMatch(null)} onPredict={onPredict} />
+      <ScoreGuessDrawer match={scoreMatch} onClose={() => setScoreMatch(null)} />
     </div>
   );
 }
@@ -347,12 +493,12 @@ function PredictionResultScreen({
   );
 }
 
-function PredictView({ initialHome, initialAway }: { initialHome: Team; initialAway: Team }) {
+function PredictView({ initialHome, initialAway, initialAutoStart = false }: { initialHome: Team; initialAway: Team; initialAutoStart?: boolean }) {
   const [homeId, setHomeId] = useState(initialHome.id);
   const [awayId, setAwayId] = useState(initialAway.id);
   const [modelWeights, setModelWeights] = useState<ModelWeights>(defaultModelWeights);
   const [selectedFactor, setSelectedFactor] = useState<Prediction["factors"][number] | null>(null);
-  const [phase, setPhase] = useState<PredictionPhase>("idle");
+  const [phase, setPhase] = useState<PredictionPhase>(initialAutoStart ? "analyzing" : "idle");
   const [activeStage, setActiveStage] = useState(0);
   const home = teamById.get(homeId)!;
   const away = teamById.get(awayId)!;
@@ -476,9 +622,11 @@ export function WorldCupApp() {
   const [view, setView] = useState<View>("today");
   const [selected, setSelected] = useState<[Team, Team]>([teamById.get("bra")!, teamById.get("mar")!]);
   const [pendingTeam, setPendingTeam] = useState<Team | null>(null);
+  const [autoStartPrediction, setAutoStartPrediction] = useState(false);
 
-  const startPrediction = (home: Team, away: Team) => {
+  const startPrediction = (home: Team, away: Team, autoStart = false) => {
     setSelected([home, away]);
+    setAutoStartPrediction(autoStart);
     setPendingTeam(null);
     setView("predict");
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -501,7 +649,7 @@ export function WorldCupApp() {
       <div className="mx-auto w-full max-w-xl px-4 py-6 md:max-w-3xl md:px-8 md:py-10">
         {view === "today" ? <TodayView onPredict={startPrediction} /> : null}
         {view === "groups" ? <GroupsView selectedTeam={pendingTeam} onSelect={selectFromGroup} onPredict={startPrediction} onClear={() => setPendingTeam(null)} /> : null}
-        {view === "predict" ? <PredictView key={`${selected[0].id}-${selected[1].id}`} initialHome={selected[0]} initialAway={selected[1]} /> : null}
+        {view === "predict" ? <PredictView key={`${selected[0].id}-${selected[1].id}-${autoStartPrediction}`} initialHome={selected[0]} initialAway={selected[1]} initialAutoStart={autoStartPrediction} /> : null}
         {view === "more" ? <div className="flex flex-col gap-5"><h1 className="text-3xl font-black">更多数据</h1><Card><CardContent className="p-5"><h2 className="font-bold">历史数据已接入</h2><p className="mt-2 text-sm text-muted-foreground">本地历史库包含 {historyMetadata.totalPlayedMatches.toLocaleString()} 场已完赛国家队比赛，数据截止 {historyMetadata.latestPlayedDate}。</p><div className="mt-4 flex flex-wrap gap-2"><Badge variant="outline">来源：martj42/international_results</Badge><Badge variant="outline">许可：CC0-1.0</Badge><Badge variant="outline">近期半衰期：{historyMetadata.recencyHalfLifeYears} 年</Badge></div></CardContent></Card><Card><CardContent className="p-5"><h2 className="font-bold">模型过去表现</h2><p className="mt-2 text-sm text-muted-foreground">时间切分回测与 Brier Score 将在下一阶段接入。</p></CardContent></Card></div> : null}
       </div>
       <nav className="fixed inset-x-0 bottom-0 z-20 mx-auto grid max-w-xl grid-cols-4 border-t border-white/8 bg-[#07111d]/95 px-2 pb-[max(.75rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur-xl">
@@ -511,7 +659,7 @@ export function WorldCupApp() {
           ["predict", "预测", BarChart3],
           ["more", "更多", CircleGauge],
         ] as const).map(([id, label, Icon]) => (
-          <button key={id} onClick={() => setView(id)} className={cn("flex flex-col items-center gap-1 rounded-2xl py-2 text-xs font-semibold text-muted-foreground transition", view === id && "text-primary", id === "predict" && "relative -mt-5")}>
+          <button key={id} onClick={() => { if (id === "predict") setAutoStartPrediction(false); setView(id); }} className={cn("flex flex-col items-center gap-1 rounded-2xl py-2 text-xs font-semibold text-muted-foreground transition", view === id && "text-primary", id === "predict" && "relative -mt-5")}>
             <span className={cn("grid size-9 place-items-center rounded-full", id === "predict" && "size-14 bg-primary text-primary-foreground shadow-[0_0_28px_rgba(190,255,0,.25)]", view === id && id !== "predict" && "bg-primary/10")}><Icon /></span>{label}
           </button>
         ))}

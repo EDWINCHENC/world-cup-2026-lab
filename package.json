@@ -2,6 +2,15 @@
   "name": "world-cup-2026-lab",
   "version": "0.1.0",
   "private": true,
+  "description": "面向中文用户的开源 2026 世界杯观赛与可解释预测网站",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EDWINCHENC/world-cup-2026-lab.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

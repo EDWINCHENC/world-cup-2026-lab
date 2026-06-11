@@ -163,6 +163,31 @@
     background-image: radial-gradient(circle at 50% 40%, oklch(0.91 0.23 126 / 12%), transparent 45%);
   }
 
+  .ai-oracle-loader {
+    background-image:
+      linear-gradient(oklch(1 0 0 / 2%) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(1 0 0 / 2%) 1px, transparent 1px),
+      radial-gradient(circle at 50% 35%, oklch(0.78 0.16 214 / 14%), transparent 36%);
+    background-size: 28px 28px, 28px 28px, auto;
+  }
+
+  .ai-data-stream {
+    background: linear-gradient(105deg, transparent 25%, oklch(0.91 0.23 126 / 10%) 48%, transparent 70%);
+    animation: ai-stream 2.2s ease-in-out infinite;
+  }
+
+  .ai-orbit {
+    box-shadow: 0 0 26px oklch(0.78 0.16 214 / 10%);
+  }
+
+  .ai-orbit-one {
+    animation: orbit-spin 3.5s linear infinite;
+  }
+
+  .ai-orbit-two {
+    animation: orbit-spin-reverse 2.6s linear infinite;
+  }
+
   .prediction-cinema {
     animation: cinema-in 550ms cubic-bezier(.2,.8,.2,1);
     background-image:
@@ -248,6 +273,16 @@
 
 @keyframes orbit-spin {
   to { transform: rotate(360deg); }
+}
+
+@keyframes orbit-spin-reverse {
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes ai-stream {
+  0% { opacity: 0; transform: translateX(-70%); }
+  35%, 65% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(70%); }
 }
 
 @keyframes data-dot {
